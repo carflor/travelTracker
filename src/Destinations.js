@@ -2,16 +2,16 @@ class Destinations {
   constructor(allDestinations) {
     this.destinations = allDestinations;
   }
-
-  // method for grabbing a destination by ID 
+ 
   getDestinationById(id) {
-    this.destinations.filter(city => city.id === id)
+    return this.destinations.filter(city => city.id === id)
   }
 
-  // method for calculating cost for travel for this destination
-  // getDestinationCost(location, groupAmount, dayAmount) {
-
-  // }
+  getDestinationCost(locationObj, groupAmount, dayAmount) {
+    let lodging = locationObj.estimatedLodgingCostPerDay * dayAmount
+    let flight = locationObj.estimatedFlightCostPerPerson * groupAmount
+    return lodging + flight
+  }
 }
 
 export default Destinations; 
