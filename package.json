@@ -32,6 +32,7 @@
     "webpack-dev-server": "^3.11.0"
   },
   "dependencies": {
-    "hyper-material-theme": "^3.0.1"
+    "hyper-material-theme": "^3.0.1",
+    "moment": "^2.26.0"
   }
 }
