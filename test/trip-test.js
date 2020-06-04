@@ -8,7 +8,6 @@ describe('Trip', function() {
   beforeEach(function() {
     trip = tripTestData[0];
     newTrip = new Trip(trip);
-    // trip = destinationsTestData[0];
   })
 
   it('it should be a function', function() {
