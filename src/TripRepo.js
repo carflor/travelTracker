@@ -1,4 +1,4 @@
-class TripsRepo {
+class TripRepo {
   constructor(allTrips) {
     this.allTrips = allTrips;
   }
@@ -8,4 +8,4 @@ class TripsRepo {
   // add method that re-defines the data as an obj with keys of the user id and all their trips per user as values within key
 }
 
-export default TripsRepo;
+export default TripRepo;

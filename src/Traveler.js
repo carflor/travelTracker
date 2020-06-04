@@ -23,8 +23,8 @@ class Traveler {
 export default Traveler;
 
 
-{
-  "id": 1,
-  "name": "Ham Leadbeater",
-  "travelerType": "relaxer"
-  },
+// {
+//   "id": 1,
+//   "name": "Ham Leadbeater",
+//   "travelerType": "relaxer"
+//   },
