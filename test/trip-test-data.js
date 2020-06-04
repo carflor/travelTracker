@@ -1,4 +1,4 @@
-[{
+let tripTestData = [{
   "id": 1,
   "userID": 44,
   "destinationID": 49,
@@ -68,3 +68,5 @@
   "status": "approved",
   "suggestedActivities": []
 }]
+
+export default tripTestData;
