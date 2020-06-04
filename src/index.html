@@ -3,23 +3,39 @@
   <head>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1" name="viewport"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" type="text/scss" href="base.scss">
     <link href="https://fonts.googleapis.com/css2?family=Sriracha&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;500;700&display=swap" rel="stylesheet">
-    <title>Webpack Starter Kit</title>
+    <title>Travel Tracker Project</title>
   </head>
   <body>
     <nav>
-      <img src="https://img.icons8.com/dotty/80/000000/around-the-globe.png" alt="plane over globe icon"/>
-      <h1>Day Tripper</h1>
-
+      <img class="nav-icon" src="https://img.icons8.com/dotty/80/000000/around-the-globe.png" alt="plane over globe icon"/>
+      <h1 class="header-title">Day Tripper</h1>
     </nav>
-    <main class="login-page">
+    <main class="login-page">   
+      <section class="form">
+        <h2>Log In</h2>
+        <section class="input">
+          <section class="inputBox">
+            <label>Username</label>
+            <input class="username-input" type="text" placeholder="Enter Traveler Id">
+          </section>
+          <section class="inputBox">
+            <label>Password</label>
+            <input class="password-input" type="password" placeholder="********">
+            <section class="inputBox">
+              <input class="submit-button" type="submit" value="Sign In">
+            </section>
+          </section>
+        </section>
+      </section>
+    </main>
+    <main class="agent-dashboard hidden">
 
     </main>
-    <main class="agent-dashboard">
-
-    </main>
-    <main class="user-dashboard">
+    <main class="user-dashboard hidden">
 
     </main>
     <!-- <img src="./images/turing-logo.png" alt="turing logo" height="100px" width="100px"> -->
