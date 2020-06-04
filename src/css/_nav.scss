@@ -1,0 +1,17 @@
+nav {
+  display: flex;
+  height: 11vh;
+  font-family: $header-font;
+  background: $main-color;
+}
+
+.nav-icon {
+  width: 7vw;
+  height: 11vh;
+  margin: 0 0 0 1vw;
+}
+
+.header-title {
+  font-size: 6vh;
+  margin: 0 0 0 2vw;
+}
