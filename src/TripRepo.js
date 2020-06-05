@@ -1,11 +1,25 @@
 class TripRepo {
   constructor(allTrips) {
     this.allTrips = allTrips;
+    this.dataPerUser = this.grabDataPerUser()
   }
 
-  // add method to select trips that match the userID as an array of trips per user
+  grabDataPerUser() {
+    let result = this.allTrips.reduce((acc, trip) => {
+      if (!acc[trip.userID]) {
+        acc[trip.userID] = []
+      }
+      acc[trip.userID].push(trip)
+      return acc
+    }, {})
+    return result
+  }
 
-  // add method that re-defines the data as an obj with keys of the user id and all their trips per user as values within key
+  getTripByUserId(id) {
+    if (typeof id === 'number') {
+      return this.allTrips.filter(trip => trip.userID === id)
+    }
+  }
 }
 
 export default TripRepo;
