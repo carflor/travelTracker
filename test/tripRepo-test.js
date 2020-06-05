@@ -2,7 +2,7 @@ import { expect } from 'chai';
 import TripRepo from '../src/TripRepo';
 import tripTestData from './trip-test-data.js';
 
-describe('Trip', function() {
+describe('TripRepo', function() {
   let tripData, trips, singleTrip;
 
   beforeEach(function() {
@@ -24,6 +24,7 @@ describe('Trip', function() {
   });
 
   it('it should have a property of restructured data', function() {
+    // console.log(trips.dataPerUser['2'])
     expect(trips.dataPerUser).to.deep.equal({
       '2': [
         {
@@ -103,7 +104,7 @@ describe('Trip', function() {
   });
 
   it('it should grab a trip by ID', function() {
-    expect(trips.getTripByUserId(44)).to.deep.equal([singleTrip]);
+    expect(trips.getTripByUserId('44')).to.deep.equal([singleTrip]);
   });
 
   it('it should not return trip if argument is not passed', function() {

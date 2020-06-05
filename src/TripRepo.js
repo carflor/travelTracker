@@ -15,9 +15,11 @@ class TripRepo {
     return result
   }
 
+  // ID MUST BE STRING! 
   getTripByUserId(id) {
-    if (typeof id === 'number') {
-      return this.allTrips.filter(trip => trip.userID === id)
+    if (typeof id === 'string') {
+      // return this.allTrips.filter(trip => trip.userID === id)
+      return this.dataPerUser[id]
     }
   }
 }
