@@ -7,7 +7,19 @@
 import './css/base.scss';
 import $ from 'jquery';
 import moment from 'moment';
-// const today = moment().format("YYYY/MM/DD").split('-').join('/')
+
+// DATE CHECKS
+const today = moment().format("YYYY/MM/DD")
+console.log(today, 'today')
+const tomorrow = moment().add(1, 'day').format("YYYY/MM/DD")
+console.log(tomorrow, 'tomorrow')
+const yearAgo = moment().subtract(365, 'day').format("YYYY/MM/DD")
+console.log(yearAgo, 'yearAgo')
+const future = moment().isAfter(today)
+console.log(future, 'future')
+let duringYear = moment().isBetween(yearAgo, tomorrow);
+console.log(duringYear, 'during year check')
+
 
 // IMPORT ALL CLASSES BELOW
 import ApiFetch from './ApiFetch';
@@ -27,21 +39,23 @@ const fetchApiData = () => {
   const tripsData = api.getTrips()
   const destinationsData = api.getDestinations();
   
-  Promise.all([travelersData, tripsData, destinationsData])
+  Promise.all([travelersData, destinationsData, tripsData])
     .then(dataSet => dataSet = {
       travelersData: dataSet[0].travelers,
-      tripsData: dataSet[1].trips.map(function(trip) {
+      destinationsData: dataSet[1].destinations, 
+      tripsData: dataSet[2].trips.map(function(trip) {
         return {
           ...trip, 
-          travelerName: dataSet[0].travelers.find(traveler => traveler.id === trip.userID).name
+          travelerName: dataSet[0].travelers.find(traveler => traveler.id === trip.userID).name,
+          dailyLodging: dataSet[1].destinations.find(city => city.id === trip.destinationID).estimatedLodgingCostPerDay,
+          flightCost: dataSet[1].destinations.find(city => city.id === trip.destinationID).estimatedFlightCostPerPerson
         } 
       })
       ,
-      destinationsData: dataSet[2].destinations, 
     }).then(dataSet => {
       console.log(dataSet.travelersData)
-      console.log(dataSet.tripsData)
       console.log(dataSet.destinationsData)
+      console.log(dataSet.tripsData)
       // send data to functions to instantiate! 
     })
     .catch(error => console.log(error.message))
