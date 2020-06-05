@@ -9,7 +9,6 @@ import $ from 'jquery';
 import moment from 'moment';
 // const today = moment().format("YYYY/MM/DD").split('-').join('/')
 
-
 // IMPORT ALL CLASSES BELOW
 import ApiFetch from './ApiFetch';
 import Traveler from './Traveler';
@@ -20,7 +19,7 @@ import Destinations from './Destinations'
 // import domUpdates from './domUpdates'
 
 // Globals Variables
-let api = new ApiFetch();
+const api = new ApiFetch();
 
 // ApiFetch
 const fetchApiData = () => {
@@ -31,7 +30,13 @@ const fetchApiData = () => {
   Promise.all([travelersData, tripsData, destinationsData])
     .then(dataSet => dataSet = {
       travelersData: dataSet[0].travelers,
-      tripsData: dataSet[1].trips,
+      tripsData: dataSet[1].trips.map(function(trip) {
+        return {
+          ...trip, 
+          travelerName: dataSet[0].travelers.find(traveler => traveler.id === trip.userID).name
+        } 
+      })
+      ,
       destinationsData: dataSet[2].destinations, 
     }).then(dataSet => {
       console.log(dataSet.travelersData)
