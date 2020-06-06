@@ -1,5 +1,5 @@
 .traveler-details-box {
-  width: 38vw;
+  width: 42vw;
   height: 77vh;
   background: lighten($faded-color, 5%);
   border: 3px solid black;
@@ -41,7 +41,7 @@
   border-radius: 3vh;
   margin-top: 3vh;
   padding: 2vh;
-  font-size: 5vh;
+  font-size: 4vh;
   text-align: center;
 }
 
@@ -52,12 +52,13 @@
 }
 
 .trips-today-pending {
-  width: 33vw;
+  width: 37vw;
   height: 65vh;
   background: lighten($main-color, 5%);
   border-radius: 3vh;
   margin: 2vh;
   overflow: scroll;
+  pointer-events: auto;
 }
 
 .upcoming-trips-box {
@@ -100,7 +101,7 @@
 }
 
 .trip-card {
-  width: 33vw;
+  width: 37vw;
   height: 17vh;
   background: $icon-color;
   border-radius: 2vh;
