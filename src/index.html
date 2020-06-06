@@ -12,10 +12,15 @@
   </head>
   <body>
     <nav>
-      <img class="nav-icon" src="https://img.icons8.com/dotty/80/000000/around-the-globe.png" alt="plane over globe icon"/>
-      <h1 class="header-title">Day Tripper</h1>
+      <section class="icon-title-container">
+        <img class="nav-icon" src="https://img.icons8.com/dotty/80/000000/around-the-globe.png" alt="plane over globe icon"/>
+        <h1 class="header-title">Day Tripper</h1>
+      </section>
+      <section class="nav-btn-container">
+        <button class="log-out-btn invisible">Log Out</button>
+      </section>
     </nav>
-    <main class="login-page hidden">   
+    <main class="login-page">   
       <section class="form">
         <h2>Log In</h2>
         <section class="input">
@@ -36,14 +41,14 @@
     <main class="agent-dashboard hidden">
 
     </main>
-    <main class="user-dashboard">
+    <main class="user-dashboard hidden">
       <section class="traveler-details-box">
         <section class="welcome-message">Uhtrech Dashboard</section>
         <button class="plan-new-trip">Book A Trip</button>
         <button class="history-button">Travel History</button>
         <section class="travel-points">Current Travel Points: 10,455</section>
       </section>
-      <section class="travel-history-container">
+      <section class="travel-history-container hidden">
         <section class="button-container">
           <button class="current-trips">Pending</button>
           <button class="past-trips">Past Trips</button>
@@ -80,46 +85,66 @@
           </section>
         
         </section>
-        <section class="upcoming-trips hidden">
+        <section class="upcoming-trips-box hidden">
           <!-- INSERT HTML HERE - MOCK DATA -->
-          <section class="trip-card">
-            <p class="destination">Chicago, United States</p>
+          <section class="upcoming-trip-card">
+            <p class="destination">Santiago, Chile</p>
             <p class="dates">"YYYY/MM/DD" to "YYYY/MM/DD"</p>
             <p class="day-amount">6 Days</p>
-            <p class="group-size">Party Size: 2</p>
-            <p class="status">Pending</p>
+            <section class="card-bottom">
+              <p class="group-size">Party Size: 2</p>
+              <p class="status">Cancelled</p>
+            </section>
           </section>
           <section class="trip-card">
-            <p class="destination">Chicago, United States</p>
+            <p class="destination">Buenos Aires, Argentina</p>
             <p class="dates">"YYYY/MM/DD" to "YYYY/MM/DD"</p>
             <p class="day-amount">6 Days</p>
-            <p class="group-size">Party Size: 2</p>
-            <p class="status">Pending</p>
+            <section class="card-bottom">
+              <p class="group-size">Party Size: 2</p>
+              <p class="status">Cancelled</p>
+            </section>
           </section>
         </section>
-        <section class="trip-history hidden">
+        <section class="trip-history-box hidden">
           <!-- INSERT HTML HERE - MOCK DATA -->
           <section class="trip-card">
-            <p class="destination">Somewhere, Antartica</p>
+            <p class="destination">Buenos Aires, Argentina</p>
             <p class="dates">"YYYY/MM/DD" to "YYYY/MM/DD"</p>
             <p class="day-amount">6 Days</p>
             <p class="group-size">Party Size: 2</p>
-          </section>
+          </section> 
           <section class="trip-card">
-            <p class="destination">Somewhere, Antartica</p>
-            <p class="dates">"YYYY/MM/DD" to "YYYY/MM/DD"</p>
-            <p class="day-amount">6 Days</p>
-            <p class="group-size">Party Size: 2</p>
-          </section>
-          <section class="trip-card">
-            <p class="destination">Somewhere, Antartica</p>
+            <p class="destination">Buenos Aires, Argentina</p>
             <p class="dates">"YYYY/MM/DD" to "YYYY/MM/DD"</p>
             <p class="day-amount">6 Days</p>
             <p class="group-size">Party Size: 2</p>
           </section>
         </section>
       </section>
-      <section class="new-trip-container hidden">
+      <section class="new-trip-container">
+        <form class="search-container" tabindex="0">
+          <label for="search"></label>
+          <input id="search" class="search-bar" type="search" placeholder="Search destinations..." aria-label="search-input"/>
+          <img class="search-icon" src="https://img.icons8.com/color/48/000000/search.png" alt="search-icon"/>
+        </form>
+        <section class="location-container">
+          <section class="location-card">
+            <p class="location-name">Athens, Greece</p>
+            <!-- SPACE FOR IMAGE -->
+            <img class="location-img">
+            <section class="location-card-bottom">
+              <p class="flight-cost">Aprox Flight Cost: $700</p>
+              <!-- perhaps add calculator icon to this button -->
+              <button class="calculate-estimate">Calculate Estimate</button>
+              <form class="finish-booking">
+                <
+
+              </form>
+
+            </section>
+          </section>
+        </section>
       </section>
 
     </main>
