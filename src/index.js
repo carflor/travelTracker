@@ -1,11 +1,5 @@
-
-// An example of how you tell webpack to use an image (also need to link to it in the index.html)
-// import './images/turing-logo.png'
-// An example of how you tell webpack to use an image (also need to link to it in the index.html)
-// import './images/turing-logo.png'
-
+import $ from "jquery";
 import './css/base.scss';
-import $ from 'jquery';
 import moment from 'moment';
 
 // DATE CHECKS
@@ -20,18 +14,21 @@ console.log(future, 'future')
 let duringYear = moment().isBetween(yearAgo, tomorrow);
 console.log(duringYear, 'during year check')
 
-
 // IMPORT ALL CLASSES BELOW
 import ApiFetch from './ApiFetch';
-import Traveler from './Traveler';
 import TravelerRepo from './TravelerRepo'
-import Trip from './Trip';
 import TripRepo from './TripRepo';
-import Agent from './Agent';
 import Destinations from './Destinations'
-// import domUpdates from './domUpdates'
+import DomUpdates from './domUpdates';
+import Traveler from './Traveler';
+import Agent from './Agent';
+import Trip from './Trip';
+import Domupdates from './domUpdates';
 
-// Globals Variables
+let domUpdates = new DomUpdates()
+let travelersRepo;
+let destinationsRepo;
+let tripsRepo;
 
 // ApiFetch
 const fetchApiData = () => {
@@ -54,46 +51,60 @@ const fetchApiData = () => {
       })
       ,
     }).then(dataSet => {
-      console.log(dataSet.travelersData)
-      console.log(dataSet.destinationsData)
-      console.log(dataSet.tripsData)
-      // send data to functions to instantiate! 
-    })
-    .catch(error => console.log(error.message))
+      const allTravelers = dataSet.travelersData;
+      const allTrips = dataSet.tripsData;
+      const allDestinations = dataSet.destinationsData;
+      start(allTravelers, allDestinations, allTrips)
+    }).catch(error => console.log(error.message))
 }
 
+// APP START - instantiations
+function start(travelersData, destinationsData, tripsData) {
+  travelersRepo = new TravelerRepo(travelersData)
+  destinationsRepo = new Destinations(destinationsData)
+  tripsRepo = new TripRepo(tripsData)
+}
 
+// Log In validation
+$('.submit-button').click(() => {
+  let username = $('.username-input').val()
+  let password = $('.password-input').val();
+  let traveler = username.split('').splice(0, 8).join('')
+  let travelerId = Number(username.split('').splice(8).join(''))
 
+  if (username === 'agent' && password === 'travel2020') {
+    loadAgent()
+  } else if ((traveler === 'traveler' && travelerId) && (password === 'travel2020')) {
+    loadTraveler(travelerId)
+  } else {
+    domUpdates.incorrectLogin()
+  }
+})
 
+function loadTraveler(id) {
+  let trips = tripsRepo.dataPerUser
+  let currentUser = travelersRepo.getTravelerById(id)
+  let user = new Traveler(currentUser, trips)
+  console.log(user, 'user instance in LOAD')
+  domUpdates.displayUserDashboard()
+  
+}
 
+function loadAgent() {
+  let agent = new Agent(travelersRepo, tripsRepo, destinationsRepo)
+  domUpdates.displayAgentDashboard()
+  console.log(agent, 'AGENT IN LOAD')
+}
 
+// LOGOUT
+$('.log-out-btn').click(() => location.reload(true))
 
-
-
-
-// log in validation - translate to traveler 
-// $('.submit-button').click(() => {
-//   let username = $('.username-input')
-//   let password = $('.password-input')
-//   let customer = username.val().split('').splice(0, 8).join('')
-//   let customerId = Number(username.val().split('').splice(8).join(''))
-
-//   if ((customer === 'manager') && (password.val() === 'travel2020')) {
-//     displayManagerDashboard()
-//   } else if ((customer === 'traveler' && customerId) && (password.val() === 'travel2020')) {
-//     displayCustomerDashboard(customerId)
-//     loadCustomer(customerId, manager)
-//   } else {
-//     incorrectLogin()
-//   }
-// })
-
-
-// INCORRECT LOGIN - do this or download the npm for alerts
-// function incorrectLogin() {
-//   alert("Please Enter Correct Username and Password")
-//   $('.username-input').val('')
-//   $('.password-input').val('')
+// EventHandler for Book Trip Form
+// const eventHandler = (event) => {
+//   if (event.target.classList.contains('')) {
+//    
+//   } else if (event.target.classList.contains('')) {
+//     
 // }
 
-fetchApiData()
+fetchApiData();
