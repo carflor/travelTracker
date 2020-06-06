@@ -8,13 +8,14 @@
     <link href="https://fonts.googleapis.com/css2?family=Sriracha&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;500;700&display=swap" rel="stylesheet">
     <title>Travel Tracker Project</title>
+    <!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
   </head>
   <body>
     <nav>
       <img class="nav-icon" src="https://img.icons8.com/dotty/80/000000/around-the-globe.png" alt="plane over globe icon"/>
       <h1 class="header-title">Day Tripper</h1>
     </nav>
-    <main class="login-page">   
+    <main class="login-page hidden">   
       <section class="form">
         <h2>Log In</h2>
         <section class="input">
@@ -35,7 +36,91 @@
     <main class="agent-dashboard hidden">
 
     </main>
-    <main class="user-dashboard hidden">
+    <main class="user-dashboard">
+      <section class="traveler-details-box">
+        <section class="welcome-message">Uhtrech Dashboard</section>
+        <button class="plan-new-trip">Book A Trip</button>
+        <button class="history-button">Travel History</button>
+        <section class="travel-points">Current Travel Points: 10,455</section>
+      </section>
+      <section class="travel-history-container">
+        <section class="button-container">
+          <button class="current-trips">Pending</button>
+          <button class="past-trips">Past Trips</button>
+          <button class="upcoming-trips">Upcoming</button>
+        </section>
+        <section class="trips-today-pending">
+          <!-- MOCK DATA PLACED HERE -- INSERT HTML HERE -->
+          <section class="trip-card">
+            <p class="destination">Lima, Peru</p>
+            <p class="dates">"YYYY/MM/DD" to "YYYY/MM/DD"</p>
+            <p class="day-amount">6 Days</p>
+            <section class="card-bottom">
+              <p class="group-size">Party Size: 2</p>
+              <p class="status">Pending Approval</p>
+            </section>
+          </section>
+          <section class="trip-card">
+            <p class="destination">Lima, Peru</p>
+            <p class="dates">"YYYY/MM/DD" to "YYYY/MM/DD"</p>
+            <p class="day-amount">6 Days</p>
+            <section class="card-bottom">
+              <p class="group-size">Party Size: 2</p>
+              <p class="status">Approved</p>
+            </section>
+          </section>
+          <section class="trip-card">
+            <p class="destination">Lima, Peru</p>
+            <p class="dates">"YYYY/MM/DD" to "YYYY/MM/DD"</p>
+            <p class="day-amount">6 Days</p>
+            <section class="card-bottom">
+              <p class="group-size">Party Size: 2</p>
+              <p class="status">Cancelled</p>
+            </section>
+          </section>
+        
+        </section>
+        <section class="upcoming-trips hidden">
+          <!-- INSERT HTML HERE - MOCK DATA -->
+          <section class="trip-card">
+            <p class="destination">Chicago, United States</p>
+            <p class="dates">"YYYY/MM/DD" to "YYYY/MM/DD"</p>
+            <p class="day-amount">6 Days</p>
+            <p class="group-size">Party Size: 2</p>
+            <p class="status">Pending</p>
+          </section>
+          <section class="trip-card">
+            <p class="destination">Chicago, United States</p>
+            <p class="dates">"YYYY/MM/DD" to "YYYY/MM/DD"</p>
+            <p class="day-amount">6 Days</p>
+            <p class="group-size">Party Size: 2</p>
+            <p class="status">Pending</p>
+          </section>
+        </section>
+        <section class="trip-history hidden">
+          <!-- INSERT HTML HERE - MOCK DATA -->
+          <section class="trip-card">
+            <p class="destination">Somewhere, Antartica</p>
+            <p class="dates">"YYYY/MM/DD" to "YYYY/MM/DD"</p>
+            <p class="day-amount">6 Days</p>
+            <p class="group-size">Party Size: 2</p>
+          </section>
+          <section class="trip-card">
+            <p class="destination">Somewhere, Antartica</p>
+            <p class="dates">"YYYY/MM/DD" to "YYYY/MM/DD"</p>
+            <p class="day-amount">6 Days</p>
+            <p class="group-size">Party Size: 2</p>
+          </section>
+          <section class="trip-card">
+            <p class="destination">Somewhere, Antartica</p>
+            <p class="dates">"YYYY/MM/DD" to "YYYY/MM/DD"</p>
+            <p class="day-amount">6 Days</p>
+            <p class="group-size">Party Size: 2</p>
+          </section>
+        </section>
+      </section>
+      <section class="new-trip-container hidden">
+      </section>
 
     </main>
     <!-- <img src="./images/turing-logo.png" alt="turing logo" height="100px" width="100px"> -->
