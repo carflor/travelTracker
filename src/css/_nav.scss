@@ -1,8 +1,16 @@
 nav {
   display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
   height: 9vh;
   font-family: $header-font;
   background: $main-color;
+}
+
+.icon-title-container {
+  display: flex;
+  flex-direction: row;
 }
 
 .nav-icon {
@@ -14,4 +22,32 @@ nav {
 .header-title {
   font-size: 5vh;
   margin: 0 0 0 2vw;
+}
+
+.nav-btn-container {
+  justify-content: end;
+}
+
+button {
+  color: $primary-background;
+  background-color: lighten($button-color, 30%);
+  border-radius: 10px;
+  border: outset;
+  padding: 5px;
+  margin-right: 3em;
+  width: 8em;
+  height: 3.3em;
+  font-size: .9em;
+  letter-spacing: 1px;
+  font-weight: 700;
+  box-shadow: -1px -1px 6px $shadow;
+  pointer-events: auto;
+  &:hover {
+    border-radius: 10px;
+    border: 1px solid darken($button-color, 30%);
+  }
+  &:focus {
+    border-radius: 10px;
+    border: 1px solid darken($button-color, 30%);
+  }
 }
