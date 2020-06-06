@@ -29,6 +29,7 @@ describe('TripRepo', function() {
         {
           id: 89,
           userID: 2,
+          travelerName: "Rachael Vaughten",
           destinationID: 10,
           dailyLodging: 90,
           flightCost: 450,
@@ -41,6 +42,7 @@ describe('TripRepo', function() {
         {
           id: 100,
           userID: 2,
+          travelerName: "Rachael Vaughten",
           destinationID: 6,
           dailyLodging: 70,
           flightCost: 890,
@@ -53,6 +55,7 @@ describe('TripRepo', function() {
         {
           id: 116,
           userID: 2,
+          travelerName: "Rachael Vaughten",
           destinationID: 7,
           dailyLodging: 100,
           flightCost: 395,
@@ -65,6 +68,7 @@ describe('TripRepo', function() {
         {
           id: 166,
           userID: 2,
+          travelerName: "Rachael Vaughten",
           destinationID: 7,
           dailyLodging: 100,
           flightCost: 395,
@@ -77,6 +81,7 @@ describe('TripRepo', function() {
         {
           id: 171,
           userID: 2,
+          travelerName: "Rachael Vaughten",
           destinationID: 43,
           dailyLodging: 550,
           flightCost: 90,
@@ -89,11 +94,12 @@ describe('TripRepo', function() {
         {
           id: 177,
           userID: 2,
+          travelerName: "Rachael Vaughten",
           destinationID: 20,
           dailyLodging: 158,
           flightCost: 275,
           travelers: 6,
-          date: '2020/01/29',
+          date: '2020/06/29',
           duration: 8,
           status: 'approved',
           suggestedActivities: []
@@ -101,16 +107,17 @@ describe('TripRepo', function() {
       ],
       "44": [
         {
-          "id": 1,
-          "userID": 44,
-          "destinationID": 49,
-          "dailyLodging": 650,
-          "flightCost": 90,
-          "travelers": 1,
-          "date": "2019/09/16",
-          "duration": 8,
-          "status": "approved",
-          "suggestedActivities": []
+          id: 1,
+          userID: 44,
+          travelerName: "Marijo MacNeilley",
+          destinationID: 49,
+          dailyLodging: 650,
+          flightCost: 90,
+          travelers: 1,
+          date: "2019/09/16",
+          duration: 8,
+          status: "approved",
+          suggestedActivities: []
         }
       ]});
   });
