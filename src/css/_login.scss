@@ -27,6 +27,7 @@
       margin-top: 20px;
       input {
         width: 100%;
+        pointer-events: auto;
         height: 50px;
         color: $main-color;
         background: $button-color;

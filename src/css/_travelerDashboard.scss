@@ -1,0 +1,129 @@
+.traveler-details-box {
+  width: 38vw;
+  height: 77vh;
+  background: lighten($faded-color, 5%);
+  border: 3px solid black;
+  margin-top: 6vh;
+  border-radius: 3vh;
+  box-shadow: $shadow;
+  @include flexed(column);
+  button {
+    color: lighten($button-color, 20%);
+    background-color: lighten($primary-background, 10%);
+    border-radius: 3vh;
+    border: outset;
+    padding: 1vh;
+    width: 12vw;
+    height: 12vh;
+    font-size: .9em;
+    letter-spacing: 1px;
+    font-weight: 700;
+    box-shadow: -1px -1px 6px $shadow;
+    pointer-events: auto;
+    &:hover {
+      border-radius: 10px;
+      border: 1px solid darken($button-color, 30%);
+      background-color: lighten($primary-background, 40%);
+    }
+    &:focus {
+      border-radius: 10px;
+      border: 1px solid darken($button-color, 30%);
+      background-color: lighten($primary-background, 40%);
+    }
+  }
+}
+
+.welcome-message {
+  width: 33vw;
+  height: 10vh;
+  background: $button-color;
+  border: 2px solid black;
+  border-radius: 3vh;
+  margin-top: 3vh;
+  padding: 2vh;
+  font-size: 5vh;
+  text-align: center;
+}
+
+.travel-points {
+  @extend .welcome-message;
+  margin-bottom: 3vh;
+  font-size: 3.5vh;
+}
+
+.trips-today-pending {
+  width: 33vw;
+  height: 65vh;
+  background: lighten($main-color, 5%);
+  border-radius: 3vh;
+  margin: 2vh;
+  overflow: scroll;
+}
+
+.upcoming-trips {
+  @extend .trips-today-pending;
+}
+
+.trip-history {
+  @extend .trips-today-pending;
+}
+
+
+.travel-history-container {
+  @extend .traveler-details-box;
+  background: darken($main-color, 3%);
+  .current-trips {
+    width: 10vw;
+    height: 7vh;
+    margin-top: 3vh;
+    margin: .5em;
+  }
+  .past-trips {
+    @extend .current-trips;
+  }
+  .upcoming-trips {
+    @extend .current-trips
+  }
+}
+
+.new-trip-container {
+  width: 38vw;
+  height: 77vh;
+  background: lighten($main-color, 3%);
+  border: 3px solid black;
+  margin-top: 6vh;
+  border-radius: 3vh;
+  box-shadow: $shadow;
+}
+
+.trip-card {
+  width: 33vw;
+  height: 17vh;
+  background: $icon-color;
+  border-radius: 2vh;
+  padding: 1vw;
+  margin-bottom: 1vh;
+
+  .destination {
+    font-weight: 700;
+    letter-spacing: .1vw;
+    // padding: 0.2vh;
+  }
+
+  p {
+    padding: 0.2vh;
+  }
+}
+
+
+.card-bottom {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.status {
+  font-weight: 800;
+  color: darkviolet;
+  font-size: 4vh;
+}
