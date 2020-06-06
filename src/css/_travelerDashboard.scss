@@ -60,11 +60,11 @@
   overflow: scroll;
 }
 
-.upcoming-trips {
+.upcoming-trips-box {
   @extend .trips-today-pending;
 }
 
-.trip-history {
+.trip-history-box {
   @extend .trips-today-pending;
 }
 
@@ -93,7 +93,10 @@
   border: 3px solid black;
   margin-top: 6vh;
   border-radius: 3vh;
-  box-shadow: $shadow;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
 .trip-card {
@@ -107,7 +110,6 @@
   .destination {
     font-weight: 700;
     letter-spacing: .1vw;
-    // padding: 0.2vh;
   }
 
   p {
@@ -115,6 +117,9 @@
   }
 }
 
+.upcoming-trip-card {
+  @extend .trip-card;
+}
 
 .card-bottom {
   display: flex;
@@ -126,4 +131,52 @@
   font-weight: 800;
   color: darkviolet;
   font-size: 4vh;
+}
+
+.search-container {
+  display: flex;
+  flex-direction: row;
+  border: 2px solid $primary-background;
+  width: 15.5vw;
+  height: 7vh;
+  background: #ebf5fc;
+  border-radius: 1vh;
+  margin-top: 1vh;
+  pointer-events: auto;
+
+  input {
+    width: 12vw;
+    font-size: 2vh;
+  }
+
+  img {
+    width: 3vw;
+    height: 6vh;
+    max-height: 7vh;
+    max-width: 7vw;
+  }
+}
+
+.location-container {
+  @extend .trips-today-pending;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.location-card {
+  width: 22vw;
+  height: 37vh;
+  background: white;
+  border-radius: 1vh;
+  align-content: center;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+
+  .location-img {
+    width: 39vh;
+    height: 26vh;
+  }
 }
