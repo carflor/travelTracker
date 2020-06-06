@@ -5,17 +5,15 @@ class TripRepo {
   }
 
   grabDataPerUser() {
-    let result = this.allTrips.reduce((acc, trip) => {
+    return this.allTrips.reduce((acc, trip) => {
       if (!acc[trip.userID]) {
         acc[trip.userID] = []
       }
       acc[trip.userID].push(trip)
       return acc
     }, {})
-    return result
   }
 
-  // ID MUST BE STRING! 
   getTripByUserId(id) {
     if (typeof id === 'string') {
       // return this.allTrips.filter(trip => trip.userID === id)

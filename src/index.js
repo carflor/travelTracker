@@ -24,6 +24,7 @@ console.log(duringYear, 'during year check')
 // IMPORT ALL CLASSES BELOW
 import ApiFetch from './ApiFetch';
 import Traveler from './Traveler';
+import TravelerRepo from './TravelerRepo'
 import Trip from './Trip';
 import TripRepo from './TripRepo';
 import Agent from './Agent';
@@ -31,10 +32,10 @@ import Destinations from './Destinations'
 // import domUpdates from './domUpdates'
 
 // Globals Variables
-const api = new ApiFetch();
 
 // ApiFetch
 const fetchApiData = () => {
+  const api = new ApiFetch();
   const travelersData = api.getTravelers()
   const tripsData = api.getTrips()
   const destinationsData = api.getDestinations();

@@ -20,7 +20,6 @@ class Traveler {
       }
       return acc
     }, [])
-
   }
 
   // method for calculating pending trips
