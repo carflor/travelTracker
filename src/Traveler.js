@@ -1,30 +1,66 @@
+import moment from 'moment';
 class Traveler {
-  constructor(user) {
+  constructor(user, allTrips) {
     this.id = user.id;
     this.name = user.name;
     this.travelerType = user.travelerType;
+    this.tripHistory = allTrips[this.id.toString()]
+    this.yearsTrips = this.getTripsThisYear()
+    this.futureTrips = this.getFutureTrips()
+  }
+  
+  // method for show upcoming trips
+  // add display on dom functionality
+  getFutureTrips() {
+    let today = moment().format("YYYY/MM/DD")
+    return this.tripHistory.reduce((acc, trip) => {
+      let tripDate = trip.date
+      if (!moment(tripDate).isBefore(today) && trip.status === 'approved') {
+        acc.push(trip)
+      }
+      return acc
+    }, [])
+  }
 
-    // create property for user trips (all)
-    // create property for user upcoming trips array
-    // create property for user past trips array
-    // create property for user pending trips array
-
+  getPastTrips() {
+    let today = moment().format("YYYY/MM/DD")
+    return this.tripHistory.reduce((acc, trip) => {
+      let tripDate = trip.date
+      if (moment(tripDate).isBefore(today)) {
+        acc.push(trip)
+      }
+      return acc
+    }, [])
   }
 
   // method for calculating pending trips
-  // method for calculating past trips
-  // method for calculating upcoming trips
+  // add domdisplay fn for this method
+  getPendingTrips() {
+    return this.tripHistory.filter(trip => trip.status === 'pending')
+  }
 
-  // method to calculate amount spent on trips THIS YEAR
+  //add dom display fn for this method
+  getTripsThisYear() {
+    let yearAgo = moment().subtract(365, 'day').format("YYYY/MM/DD")
+    let tomorrow = moment().add(1, 'day').format("YYYY/MM/DD")
+    console.log(this.tripHistory, 'ERROR LOG')
+    return this.tripHistory.reduce((acc, trip) => {
+      let tripDate = trip.date
+      if (moment(tripDate).isBetween(yearAgo, tomorrow)) {
+        acc.push(trip)
+      }
+      return acc
+    }, [])
+  }
 
-  // method for trip request 
+  //add dom display fn for this method
+  getAmountSpentThisYear() {
+    return this.yearsTrips.reduce((acc, trip) => {
+      acc += trip.duration * trip.dailyLodging
+      acc += trip.flightCost * trip.travelers
+      return acc
+    }, 0)
+  }
 }
 
 export default Traveler;
-
-
-{
-  "id": 1,
-  "name": "Ham Leadbeater",
-  "travelerType": "relaxer"
-  },

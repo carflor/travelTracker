@@ -1,14 +1,13 @@
 class Trip {
-  constructor(userID, destinationID, travelers, date, duration, status) {
-    // this.id = randomize an id for the trip
-    this.userID = userID;
-    this.destinationID = destinationID;
-    this.travelers = travelers;
-    this.date = date;
-    this.duration = duration; 
-    this.status = status || 'pending';
-    this.suggestedActivities = [];
-
+  constructor(tripObj) {
+    this.id = tripObj.id || Date.now();
+    this.userID = tripObj.userID;
+    this.destinationID = tripObj.destinationID;
+    this.travelers = tripObj.travelers;
+    this.date = tripObj.date;
+    this.duration = tripObj.duration; 
+    this.status = tripObj.status || 'pending';
+    this.suggestedActivities = tripObj.suggestedActivities;
   }
 }
 

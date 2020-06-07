@@ -1,0 +1,17 @@
+$primary-background: #30475e;
+$main-color: #f2a365;
+$button-color: #ebf5fc;
+$room-color: #222831;
+$icon-color: #FFFDF9;
+$faded-color: #bdcada;
+$shiny-border: #ee8736;
+$shadow: rgba(255, 255, 255, 0.3);
+$header-font: 'Sriracha', cursive;
+$text-font: 'Rubik', sans-serif;
+
+@mixin flexed($direction) {
+  display: flex;
+  flex-direction: $direction;
+  justify-content: space-between;
+  align-items: center;
+}
