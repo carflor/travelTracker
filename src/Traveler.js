@@ -4,7 +4,7 @@ class Traveler {
     this.id = user.id;
     this.name = user.name;
     this.travelerType = user.travelerType;
-    this.tripHistory = allTrips.dataPerUser[this.id.toString()]
+    this.tripHistory = allTrips[this.id.toString()]
     this.yearsTrips = this.getTripsThisYear()
     this.futureTrips = this.getFutureTrips()
   }
@@ -22,6 +22,17 @@ class Traveler {
     }, [])
   }
 
+  getPastTrips() {
+    let today = moment().format("YYYY/MM/DD")
+    return this.tripHistory.reduce((acc, trip) => {
+      let tripDate = trip.date
+      if (moment(tripDate).isBefore(today)) {
+        acc.push(trip)
+      }
+      return acc
+    }, [])
+  }
+
   // method for calculating pending trips
   // add domdisplay fn for this method
   getPendingTrips() {
@@ -32,6 +43,7 @@ class Traveler {
   getTripsThisYear() {
     let yearAgo = moment().subtract(365, 'day').format("YYYY/MM/DD")
     let tomorrow = moment().add(1, 'day').format("YYYY/MM/DD")
+    console.log(this.tripHistory, 'ERROR LOG')
     return this.tripHistory.reduce((acc, trip) => {
       let tripDate = trip.date
       if (moment(tripDate).isBetween(yearAgo, tomorrow)) {
@@ -48,11 +60,6 @@ class Traveler {
       acc += trip.flightCost * trip.travelers
       return acc
     }, 0)
-  }
-
-  // method for trip request 
-  requestTrip() {
-    // builds object for POST
   }
 }
 
