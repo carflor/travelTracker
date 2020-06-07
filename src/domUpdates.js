@@ -42,6 +42,24 @@ class DomUpdates {
     }
   }
 
+  displayUserDestinations(destinations, divClass) {
+    if (destinations && divClass) {
+      destinations.forEach(destination => {
+        $(divClass).append(`<section class="location-card" tabindex='0'>
+            <p class="location-name">${destination.destination}</p>
+            <img class="location-img" src=${destination.image} alt=${destination.alt} />
+            <section class="location-card-bottom">
+              <p class="flight-cost">Approximate Flight Cost: $${destination.estimatedFlightCostPerPerson}</p>
+              <p class="lodging-cost">Approximate Daily Lodging Cost: $${destination.estimatedLodgingCostPerDay}</p>
+              <button class="calculate-estimate">Calculate Estimate</button>
+            </section>
+          </section>
+        `)
+      })
+
+    }
+  }
+
   incorrectLogin() {
     alert("Please Enter Correct Username and Password")
     $('.username-input').val('')
