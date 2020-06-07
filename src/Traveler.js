@@ -1,8 +1,6 @@
 import moment from 'moment';
 class Traveler {
   constructor(user, allTrips) {
-    console.log(user, 'USER PASSED IN')
-    console.log(allTrips, "ALL TRIPS PASSED IN")
     this.id = user.id;
     this.name = user.name;
     this.travelerType = user.travelerType;
@@ -70,7 +68,7 @@ class Traveler {
     return this.yearsTrips.reduce((acc, trip) => {
       acc += trip.duration * trip.dailyLodging
       acc += trip.flightCost * trip.travelers
-      return acc
+      return Math.floor(acc += (acc * .1))
     }, 0)
   }
 }
