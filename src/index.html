@@ -26,11 +26,11 @@
         <section class="input">
           <section class="inputBox">
             <label>Username</label>
-            <input class="username-input" type="text" placeholder="Enter Traveler Id">
+            <input class="username-input" type="text" placeholder="Enter Traveler Id" value="traveler2">
           </section>
           <section class="inputBox">
             <label>Password</label>
-            <input class="password-input" type="password" placeholder="********">
+            <input class="password-input" type="password" placeholder="********" value="travel2020">
             <section class="inputBox">
               <input class="submit-button" type="submit" value="Sign In">
             </section>
@@ -39,90 +39,26 @@
       </section>
     </main>
     <main class="agent-dashboard hidden">
-
+      <!-- INSERT AGENT BOXES HERE -->
     </main>
     <main class="user-dashboard hidden">
       <section class="traveler-details-box">
-        <section class="welcome-message">Uhtrech Dashboard</section>
+        <section class="welcome-message"></section>
         <button class="plan-new-trip">Book A Trip</button>
         <button class="history-button">Travel History</button>
-        <section class="travel-points">Current Travel Points: 10,455</section>
+        <section class="travel-points"></section>
       </section>
-      <section class="travel-history-container hidden">
+      <section class="travel-history-container">
         <section class="button-container">
           <button class="current-trips">Pending</button>
           <button class="past-trips">Past Trips</button>
           <button class="upcoming-trips">Upcoming</button>
         </section>
-        <section class="trips-today-pending">
+        <section class="trips-box">
           <!-- MOCK DATA PLACED HERE -- INSERT HTML HERE -->
-          <section class="trip-card">
-            <p class="destination">Lima, Peru</p>
-            <p class="dates">"YYYY/MM/DD" to "YYYY/MM/DD"</p>
-            <p class="day-amount">6 Days</p>
-            <section class="card-bottom">
-              <p class="group-size">Party Size: 2</p>
-              <p class="status">Pending Approval</p>
-            </section>
-          </section>
-          <section class="trip-card">
-            <p class="destination">Lima, Peru</p>
-            <p class="dates">"YYYY/MM/DD" to "YYYY/MM/DD"</p>
-            <p class="day-amount">6 Days</p>
-            <section class="card-bottom">
-              <p class="group-size">Party Size: 2</p>
-              <p class="status">Approved</p>
-            </section>
-          </section>
-          <section class="trip-card">
-            <p class="destination">Lima, Peru</p>
-            <p class="dates">"YYYY/MM/DD" to "YYYY/MM/DD"</p>
-            <p class="day-amount">6 Days</p>
-            <section class="card-bottom">
-              <p class="group-size">Party Size: 2</p>
-              <p class="status">Cancelled</p>
-            </section>
-          </section>
-        
-        </section>
-        <section class="upcoming-trips-box hidden">
-          <!-- INSERT HTML HERE - MOCK DATA -->
-          <section class="upcoming-trip-card">
-            <p class="destination">Santiago, Chile</p>
-            <p class="dates">"YYYY/MM/DD" to "YYYY/MM/DD"</p>
-            <p class="day-amount">6 Days</p>
-            <section class="card-bottom">
-              <p class="group-size">Party Size: 2</p>
-              <p class="status">Cancelled</p>
-            </section>
-          </section>
-          <section class="trip-card">
-            <p class="destination">Buenos Aires, Argentina</p>
-            <p class="dates">"YYYY/MM/DD" to "YYYY/MM/DD"</p>
-            <p class="day-amount">6 Days</p>
-            <section class="card-bottom">
-              <p class="group-size">Party Size: 2</p>
-              <p class="status">Cancelled</p>
-            </section>
-          </section>
-        </section>
-        <section class="trip-history-box hidden">
-          <!-- INSERT HTML HERE - MOCK DATA -->
-          <section class="trip-card">
-            <p class="destination">Buenos Aires, Argentina</p>
-            <p class="dates">"YYYY/MM/DD" to "YYYY/MM/DD"</p>
-            <p class="day-amount">6 Days</p>
-            <p class="group-size">Party Size: 2</p>
-          </section> 
-          <section class="trip-card">
-            <p class="destination">Buenos Aires, Argentina</p>
-            <p class="dates">"YYYY/MM/DD" to "YYYY/MM/DD"</p>
-            <p class="day-amount">6 Days</p>
-            <p class="group-size">Party Size: 2</p>
-          </section>
         </section>
       </section>
-      <section class="new-trip-container">
+      <section class="new-trip-container hidden">
         <form class="search-container" tabindex="0">
           <label for="search"></label>
           <input id="search" class="search-bar" type="search" placeholder="Search destinations..." aria-label="search-input"/>
@@ -138,8 +74,7 @@
               <!-- perhaps add calculator icon to this button -->
               <button class="calculate-estimate">Calculate Estimate</button>
               <form class="finish-booking">
-                <
-
+      <!-- PLACE FORM FOR BOOKING POST here -->
               </form>
 
             </section>
