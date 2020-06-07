@@ -134,6 +134,15 @@ const userBtnHandler = (event) => {
   } 
 }
 
+// on book click 
+// change inner text to Book your trip to ${destination name}
+// change start date to today/tomorrow
+// add blur to background that is not z-index
+
+
+// when form clicks BOOK - event.preventDefault()
+
+
 
 // $('.new-trip-container').click((event) => newTripHandler(event))
 
