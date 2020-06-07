@@ -8,9 +8,9 @@ describe('Traveler', function() {
   let travelerData, traveler, trips;
 
   beforeEach(function() {
-    trips = new TripRepo(tripTestData);
     travelerData = travelerTestData[1];
-    traveler = new Traveler(travelerData, trips);
+    trips = new TripRepo(tripTestData);
+    traveler = new Traveler(travelerData, trips.dataPerUser['2']);
   })
 
   it('it should be a function', function() {
@@ -43,64 +43,11 @@ describe('Traveler', function() {
   });
 
   it('it should get list of trips for this year', function() {
-    expect(traveler.getTripsThisYear()).to.deep.equal([
-      {
-        id: 89,
-        userID: 2,
-        travelerName: 'Rachael Vaughten',
-        destinationID: 10,
-        dailyLodging: 90,
-        flightCost: 450,
-        travelers: 5,
-        date: '2019/09/27',
-        duration: 13,
-        status: 'approved',
-        suggestedActivities: []
-      },
-      {
-        id: 100,
-        userID: 2,
-        travelerName: 'Rachael Vaughten',
-        destinationID: 6,
-        dailyLodging: 70,
-        flightCost: 890,
-        travelers: 6,
-        date: '2020/3/28',
-        duration: 10,
-        status: 'approved',
-        suggestedActivities: []
-      },
-      {
-        id: 116,
-        userID: 2,
-        travelerName: 'Rachael Vaughten',
-        destinationID: 7,
-        dailyLodging: 100,
-        flightCost: 395,
-        travelers: 3,
-        date: '2020/04/03',
-        duration: 8,
-        status: 'approved',
-        suggestedActivities: []
-      },
-      {
-        id: 166,
-        userID: 2,
-        travelerName: 'Rachael Vaughten',
-        destinationID: 7,
-        dailyLodging: 100,
-        flightCost: 395,
-        travelers: 2,
-        date: '2020/03/05',
-        duration: 6,
-        status: 'approved',
-        suggestedActivities: []
-      },
-    ]);
+    expect(traveler.getTripsThisYear()).to.deep.equal(traveler.yearsTrips)
   });
 
   it('it should get amount spent in trips for the year', function() {
-    expect(traveler.getAmountSpentThisYear()).to.equal(12835);
+    expect(traveler.getAmountSpentThisYear()).to.equal(29774);
   });
 
   it('it should get amount spent in trips for the year', function() {
