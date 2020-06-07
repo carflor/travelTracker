@@ -102,9 +102,9 @@ function loadAgent() {
 $('.log-out-btn').click(() => location.reload(true))
 
 // EventHandler for Book Trip Form
-$('.button-container').click((event) => eventHandler(event))
+$('.user-dashboard').click((event) => userBtnHandler(event))
 
-const eventHandler = (event) => {
+const userBtnHandler = (event) => {
   if (event.target.classList.contains('current-trips')) {
     $('.trips-box').html('')
     domUpdates.displayTripCards(user.getPendingTrips(), '.trips-box')
@@ -117,8 +117,53 @@ const eventHandler = (event) => {
     console.log(user.getFutureTrips(), 'future trips arr for user')
     domUpdates.displayTripCards(user.getFutureTrips(), '.trips-box')
   } else if (event.target.classList.contains('history-button')) {
-    $('.trips-box').html('')
+    $('.travel-history-container').removeClass('hidden')
+    $('.new-trip-container').addClass('hidden')
+    // $('.trips-box').html('');
+
+    // FIX THIS DISPLAY - - METHOD FOR USER IS BROKEN
     domUpdates.displayTripsCards(user.getTripsThisYear(), '.trips-box')
+  } else if (event.target.classList.contains('plan-new-trip')) {
+    $('.travel-history-container').addClass('hidden')
+    $('.new-trip-container').removeClass('hidden')
+    console.log(destinationsRepo, 'global destinations')
+    console.log(travelersRepo, 'global travelers')
+    console.log(tripsRepo, 'global trips')
+    domUpdates.displayUserDestinations(destinationsRepo.destinations, '.location-container')
+  }
+}
+
+
+// $('.new-trip-container').click((event) => newTripHandler(event))
+
+// const newTripHandler = (event) => {
+//   if (event.target.classList.contains('')) {
+
+//   }
+// } 
+
+// SEARCH FUNCTION
+$('#search').on('keyup', function searchPlaces(event) {
+  const searchValue = event.target.value.toLowerCase();
+  $('.location-container').html('')
+  let searchResults = searchDestinations(searchValue)
+  let results = []
+  searchResults.forEach(city => {
+    results.push(city)
+  })
+  domUpdates.displayUserDestinations(results, '.location-container')
+})
+
+function searchDestinations(str) {
+  if (str) {
+    const filteredCities = [];
+    destinationsRepo.destinations.forEach(destination => {
+      let destinationName = destination.destination.toLowerCase();
+      if ((destinationName.includes(str) && !filteredCities.includes(destination))) {
+        filteredCities.push(destination)
+      }
+    }) 
+    return filteredCities;
   }
 }
 
