@@ -29,6 +29,7 @@ let domUpdates = new DomUpdates()
 let travelersRepo;
 let destinationsRepo;
 let tripsRepo;
+let user;
 
 // ApiFetch
 const fetchApiData = () => {
@@ -46,7 +47,8 @@ const fetchApiData = () => {
           ...trip, 
           travelerName: dataSet[0].travelers.find(traveler => traveler.id === trip.userID).name,
           dailyLodging: dataSet[1].destinations.find(city => city.id === trip.destinationID).estimatedLodgingCostPerDay,
-          flightCost: dataSet[1].destinations.find(city => city.id === trip.destinationID).estimatedFlightCostPerPerson
+          flightCost: dataSet[1].destinations.find(city => city.id === trip.destinationID).estimatedFlightCostPerPerson,
+          destination: dataSet[1].destinations.find(city => city.id === trip.destinationID).destination
         } 
       })
       ,
@@ -84,9 +86,9 @@ $('.submit-button').click(() => {
 function loadTraveler(id) {
   let trips = tripsRepo.dataPerUser
   let currentUser = travelersRepo.getTravelerById(id)
-  let user = new Traveler(currentUser, trips)
+  user = new Traveler(currentUser, trips)
   console.log(user, 'user instance in LOAD')
-  domUpdates.displayUserDashboard()
+  domUpdates.displayUserDashboard(user)
   
 }
 
@@ -100,11 +102,24 @@ function loadAgent() {
 $('.log-out-btn').click(() => location.reload(true))
 
 // EventHandler for Book Trip Form
-// const eventHandler = (event) => {
-//   if (event.target.classList.contains('')) {
-//    
-//   } else if (event.target.classList.contains('')) {
-//     
-// }
+$('.button-container').click((event) => eventHandler(event))
+
+const eventHandler = (event) => {
+  if (event.target.classList.contains('current-trips')) {
+    $('.trips-box').html('')
+    domUpdates.displayTripCards(user.getPendingTrips(), '.trips-box')
+  } else if (event.target.classList.contains('past-trips')) {
+    $('.trips-box').html('')
+    console.log(user.getPastTrips(), 'past trips arr for user')
+    domUpdates.displayTripCards(user.getPastTrips(), '.trips-box')
+  } else if (event.target.classList.contains('upcoming-trips')) {
+    $('.trips-box').html('')
+    console.log(user.getFutureTrips(), 'future trips arr for user')
+    domUpdates.displayTripCards(user.getFutureTrips(), '.trips-box')
+  } else if (event.target.classList.contains('history-button')) {
+    $('.trips-box').html('')
+    domUpdates.displayTripsCards(user.getTripsThisYear(), '.trips-box')
+  }
+}
 
 fetchApiData();
