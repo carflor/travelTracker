@@ -79,7 +79,7 @@
 }
 
 .new-trip-container {
-  width: 38vw;
+  width: 42vw;
   height: 77vh;
   background: lighten($main-color, 3%);
   border: 3px solid black;
@@ -117,8 +117,8 @@
 
 .status {
   font-weight: 800;
-  color: darkviolet;
-  font-size: 4vh;
+  color: $primary-background;
+  font-size: 2vh;
 }
 
 .search-container {
@@ -127,7 +127,7 @@
   border: 2px solid $primary-background;
   width: 15.5vw;
   height: 7vh;
-  background: #ebf5fc;
+  background: $button-color;
   border-radius: 1vh;
   margin-top: 1vh;
   pointer-events: auto;
@@ -147,24 +147,27 @@
 
 .location-container {
   @extend .trips-box;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
 }
 
 .location-card {
-  width: 22vw;
-  height: 37vh;
-  background: white;
-  border-radius: 1vh;
-  align-content: center;
-  display: flex;
-  flex-direction: column;
+  width: 31vw;
+  height: 43vh;
+  border-radius: 5vh;
   text-align: center;
+  margin: 1.5vh;
+  background: $icon-color;
+
+  .location-name {
+    font-size: 2vh;
+    letter-spacing: .2vh;
+    font-weight: bold;
+  }
 
   .location-img {
-    width: 39vh;
+    justify-content: center;
+    align-content: center;
+    text-align: center;
+    width: 25vw;
     height: 26vh;
   }
 }
@@ -173,3 +176,4 @@
   font-size: 4vh;
   padding: 6vh;
 }
+
