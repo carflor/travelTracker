@@ -86,7 +86,7 @@ $('.submit-button').click(() => {
 function loadTraveler(id) {
   let trips = tripsRepo.dataPerUser
   let currentUser = travelersRepo.getTravelerById(id)
-  user = new Traveler(currentUser, trips)
+  user = new Traveler(currentUser, trips[id.toString()])
   console.log(user, 'user instance in LOAD')
   domUpdates.displayUserDashboard(user)
   
@@ -116,13 +116,14 @@ const userBtnHandler = (event) => {
     $('.trips-box').html('')
     console.log(user.getFutureTrips(), 'future trips arr for user')
     domUpdates.displayTripCards(user.getFutureTrips(), '.trips-box')
+  } else if (event.target.classList.contains('all-trips')) {
+    $('.trips-box').html('');
+    domUpdates.displayTripCards(user.yearsTrips, '.trips-box')
   } else if (event.target.classList.contains('history-button')) {
     $('.travel-history-container').removeClass('hidden')
     $('.new-trip-container').addClass('hidden')
-    // $('.trips-box').html('');
-
-    // FIX THIS DISPLAY - - METHOD FOR USER IS BROKEN
-    domUpdates.displayTripsCards(user.getTripsThisYear(), '.trips-box')
+    $('.trips-box').html('');
+    domUpdates.displayTripCards(user.yearsTrips, '.trips-box')
   } else if (event.target.classList.contains('plan-new-trip')) {
     $('.travel-history-container').addClass('hidden')
     $('.new-trip-container').removeClass('hidden')
@@ -130,7 +131,7 @@ const userBtnHandler = (event) => {
     console.log(travelersRepo, 'global travelers')
     console.log(tripsRepo, 'global trips')
     domUpdates.displayUserDestinations(destinationsRepo.destinations, '.location-container')
-  }
+  } 
 }
 
 
