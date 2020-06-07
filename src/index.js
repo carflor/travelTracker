@@ -89,7 +89,6 @@ function loadTraveler(id) {
   user = new Traveler(currentUser, trips[id.toString()])
   console.log(user, 'user instance in LOAD')
   domUpdates.displayUserDashboard(user)
-  
 }
 
 function loadAgent() {
@@ -101,7 +100,7 @@ function loadAgent() {
 // LOGOUT
 $('.log-out-btn').click(() => location.reload(true))
 
-// EventHandler for Book Trip Form
+// EventHandler for UserPage
 $('.user-dashboard').click((event) => userBtnHandler(event))
 
 const userBtnHandler = (event) => {
@@ -110,28 +109,38 @@ const userBtnHandler = (event) => {
     domUpdates.displayTripCards(user.getPendingTrips(), '.trips-box')
   } else if (event.target.classList.contains('past-trips')) {
     $('.trips-box').html('')
-    console.log(user.getPastTrips(), 'past trips arr for user')
     domUpdates.displayTripCards(user.getPastTrips(), '.trips-box')
   } else if (event.target.classList.contains('upcoming-trips')) {
     $('.trips-box').html('')
-    console.log(user.getFutureTrips(), 'future trips arr for user')
     domUpdates.displayTripCards(user.getFutureTrips(), '.trips-box')
   } else if (event.target.classList.contains('all-trips')) {
     $('.trips-box').html('');
     domUpdates.displayTripCards(user.yearsTrips, '.trips-box')
   } else if (event.target.classList.contains('history-button')) {
-    $('.travel-history-container').removeClass('hidden')
-    $('.new-trip-container').addClass('hidden')
-    $('.trips-box').html('');
+    domUpdates.displayTravelHistory()
     domUpdates.displayTripCards(user.yearsTrips, '.trips-box')
   } else if (event.target.classList.contains('plan-new-trip')) {
-    $('.travel-history-container').addClass('hidden')
-    $('.new-trip-container').removeClass('hidden')
+    domUpdates.displayDestinationsSearch()
+    domUpdates.displayUserDestinations(destinationsRepo.destinations, '.location-container')
     console.log(destinationsRepo, 'global destinations')
     console.log(travelersRepo, 'global travelers')
     console.log(tripsRepo, 'global trips')
-    domUpdates.displayUserDestinations(destinationsRepo.destinations, '.location-container')
-  } 
+  } else if (event.target.classList.contains('calculate-estimate')) {
+    domUpdates.displayBookingPage(event)
+    // insert date value here for tomorrow as earliest travel plan
+  } else if (event.target.classList.contains('form-back-btn')) {
+    event.preventDefault()
+    $('.book-form').addClass('hidden')
+    $('.traveler-details-box').removeClass('blur')
+    $('.new-trip-container').removeClass('blur')
+  } else if (event.target.classList.contains('book-this-trip')) {
+    domUpdates.displayConfirmationPage(event, destinationsRepo)
+  } else if (event.target.classList.contains('confirm-back-btn')) {
+    $('.confirm-trip').addClass('hidden')
+    $('.book-form').removeClass('hidden')
+  } else if (event.target.classList.contains('confirm-this-trip')) {
+    // does this btn need this? 
+  }
 }
 
 // on book click 
