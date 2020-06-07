@@ -67,23 +67,34 @@
         </form>
         <section class="location-container"></section>
       </section>
-      <section class="book-form">
+      <section class="book-form hidden">
         <form class="process-booking">
           <h4 class="form-title"></h4>
           <label for="start-date">Start Date</label>
-          <input id="start-date" type="date" name="date"></input>
+          <input id="start-date" type="date" name="date" value=""></input>
           <label for="return-date">Return Date</label>
           <input id="return-date" type="date" name="date" value=""></input>
           <label for="party-size">Number of Travelers</label>
           <input id="party-size" type="number" name="party-size" min="1" max="100" placeholder="1"></input>
-          <button class="book-this-trip">Book Trip!</button>
+          <section class="form-btn-container">
+            <button class="form-back-btn">BACK</button>
+            <button class="book-this-trip">BOOK TRIP</button>
+          </section>
         </form>
       </section>
-              <!-- <form class="finish-booking">------ -->
-
-              <!-- PLACE FORM FOR BOOKING POST here -->
-              
-              <!-- </form>-------------------------- -->
+      <section class="confirm-trip hidden">
+        <section class="confirmation-container">
+          <h4 class="confirm-location"></h4>
+          <p class="confirm-start-date"></p>
+          <p class="confirm-return-date"></p>
+          <p class="confirm-party-size"></p>
+          <p class="total-cost"></p>
+          <section class="form-btn-container">
+            <button class="confirm-back-btn">BACK</button>
+            <button class="confirm-this-trip">CONFIRM BOOKING</button>
+          </section>
+        </section>
+      </section>
     </main>
     <!-- <img src="./images/turing-logo.png" alt="turing logo" height="100px" width="100px"> -->
 
