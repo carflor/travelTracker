@@ -51,7 +51,7 @@
   font-size: 3.5vh;
 }
 
-.trips-today-pending {
+.trips-box {
   width: 37vw;
   height: 65vh;
   background: lighten($main-color, 5%);
@@ -60,15 +60,6 @@
   overflow: scroll;
   pointer-events: auto;
 }
-
-.upcoming-trips-box {
-  @extend .trips-today-pending;
-}
-
-.trip-history-box {
-  @extend .trips-today-pending;
-}
-
 
 .travel-history-container {
   @extend .traveler-details-box;
@@ -118,10 +109,6 @@
   }
 }
 
-.upcoming-trip-card {
-  @extend .trip-card;
-}
-
 .card-bottom {
   display: flex;
   flex-direction: row;
@@ -159,7 +146,7 @@
 }
 
 .location-container {
-  @extend .trips-today-pending;
+  @extend .trips-box;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -180,4 +167,9 @@
     width: 39vh;
     height: 26vh;
   }
+}
+
+.default-message {
+  font-size: 4vh;
+  padding: 6vh;
 }
