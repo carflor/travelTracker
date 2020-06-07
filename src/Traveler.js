@@ -1,10 +1,12 @@
 import moment from 'moment';
 class Traveler {
   constructor(user, allTrips) {
+    console.log(user, 'USER PASSED IN')
+    console.log(allTrips, "ALL TRIPS PASSED IN")
     this.id = user.id;
     this.name = user.name;
     this.travelerType = user.travelerType;
-    this.tripHistory = allTrips[this.id.toString()]
+    this.tripHistory = allTrips;
     this.yearsTrips = this.getTripsThisYear()
     this.futureTrips = this.getFutureTrips()
   }
@@ -50,21 +52,13 @@ class Traveler {
     return this.tripHistory.filter(trip => trip.status === 'pending')
   }
 
-
-
-  
-  //add dom display fn for this method
-
-
-  // FIX THIS FUNCTION!!!
-
   getTripsThisYear() {
-    let yearAgo = moment().subtract(365, 'day').format("YYYY/MM/DD")
-    let tomorrow = moment().add(1, 'day').format("YYYY/MM/DD")
+    let firstDayYear = moment("2020/01/01").format("YYYY/MM/DD")
+    let lastDayYear = moment("2020/12/31").format("YYYY/MM/DD")
     // console.log(this.tripHistory, 'ERROR LOG')
     return this.tripHistory.reduce((acc, trip) => {
       let tripDate = trip.date
-      if (moment(trip.date).isBetween(yearAgo, tomorrow)) {
+      if (moment(tripDate).isBetween(firstDayYear, lastDayYear)) {
         acc.push(trip)
       }
       return acc
