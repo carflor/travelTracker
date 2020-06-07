@@ -22,6 +22,17 @@ class Traveler {
     }, [])
   }
 
+  getCurrentTrip() {
+    return this.tripHistory.reduce((acc, trip) => {
+      let tripDate = trip.date;
+      let tripEndDate = moment().add(trip.duration, 'day').format("YYYY/MM/DD")
+      if (moment(tripDate).isBetween(tripDate, tripEndDate)) {
+        acc.push(trip)
+      }
+      return acc
+    }, [])
+  }
+
   getPastTrips() {
     let today = moment().format("YYYY/MM/DD")
     return this.tripHistory.reduce((acc, trip) => {
@@ -39,14 +50,21 @@ class Traveler {
     return this.tripHistory.filter(trip => trip.status === 'pending')
   }
 
+
+
+  
   //add dom display fn for this method
+
+
+  // FIX THIS FUNCTION!!!
+
   getTripsThisYear() {
     let yearAgo = moment().subtract(365, 'day').format("YYYY/MM/DD")
     let tomorrow = moment().add(1, 'day').format("YYYY/MM/DD")
-    console.log(this.tripHistory, 'ERROR LOG')
+    // console.log(this.tripHistory, 'ERROR LOG')
     return this.tripHistory.reduce((acc, trip) => {
       let tripDate = trip.date
-      if (moment(tripDate).isBetween(yearAgo, tomorrow)) {
+      if (moment(trip.date).isBetween(yearAgo, tomorrow)) {
         acc.push(trip)
       }
       return acc
