@@ -16,11 +16,12 @@ class DomUpdates {
     $('.log-out-btn').removeClass('invisible')
     $('.welcome-message').html(`${user.name.split(' ')[0]} Dashboard`)
     $('.travel-points').html(`Total Travel Points: ${user.getAmountSpentThisYear()}`)
-
-    if (user.getPendingTrips()) {
+    const pendingTrips = user.getPendingTrips()
+    console.log(pendingTrips, 'pending trips var')
+    if (pendingTrips.length === 0) {
       $('.trips-box').html(`<p class='default-message'>No current travel plans<br> Please make a booking to accumulate Travel Points!<p>`)
     } else {
-      this.displayTripCards(user.getPendingTrips(), '.trips-today-pending')
+      this.displayTripCards(pendingTrips, '.trips-box')
     }
   }
   
@@ -49,9 +50,9 @@ class DomUpdates {
             <p class="location-name">${destination.destination}</p>
             <img class="location-img" src=${destination.image} alt=${destination.alt} />
             <section class="location-card-bottom">
-              <p class="flight-cost">Approximate Flight Cost: $${destination.estimatedFlightCostPerPerson}</p>
-              <p class="lodging-cost">Approximate Daily Lodging Cost: $${destination.estimatedLodgingCostPerDay}</p>
-              <button class="calculate-estimate">Calculate Estimate</button>
+              <p class="flight-cost">Flight Cost: $${destination.estimatedFlightCostPerPerson}</p>
+              <p class="lodging-cost">Daily Lodging Cost: $${destination.estimatedLodgingCostPerDay}</p>
+              <button class="calculate-estimate">BOOK</button>
             </section>
           </section>
         `)
