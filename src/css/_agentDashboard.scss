@@ -1,0 +1,21 @@
+.agent-dashboard {
+  display: flex;
+  flex-direction: column;
+}
+
+.agent-nav {
+  width: 85vw;
+  height: 10vh;
+  background: white;
+  border-radius: 3vh;
+  margin: 2vh;
+}
+
+.agent-data-container {
+  width: 90vw;
+  height: 70vh;
+  margin: 2vh;
+  background: lightblue;
+  border-radius: 3vh;
+  @include flexed(row)
+}

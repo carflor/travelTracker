@@ -97,10 +97,8 @@ function loadAgent() {
   console.log(agent, 'AGENT IN LOAD')
 }
 
-// LOGOUT
+// EVENT HANDLERS
 $('.log-out-btn').click(() => location.reload(true))
-
-// EventHandler for UserPage
 $('.user-dashboard').click((event) => userBtnHandler(event))
 
 const userBtnHandler = (event) => {
@@ -143,18 +141,7 @@ const userBtnHandler = (event) => {
   }
 }
 
-// on book click 
-// change inner text to Book your trip to ${destination name}
-// change start date to today/tomorrow
-// add blur to background that is not z-index
-
-
-// when form clicks BOOK - event.preventDefault()
-
-
-
 // $('.new-trip-container').click((event) => newTripHandler(event))
-
 // const newTripHandler = (event) => {
 //   if (event.target.classList.contains('')) {
 
