@@ -93,8 +93,8 @@
 .new-trip-container {
   width: 52vw;
   height: 77vh;
-  background: lighten($main-color, 3%);
-  border: 3px solid black;
+  background: lighten($shiny-border, 3%);
+  border: 3px solid $shiny-border;
   margin-top: 6vh;
   border-radius: 3vh;
   display: flex;
