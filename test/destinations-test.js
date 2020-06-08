@@ -28,10 +28,10 @@ describe('Destinations', function() {
   });
 
   it('it should calculate estimated travel cost traveler', function() {
-    expect(allDestinations.getDestinationCost(destination, 1, 1)).to.deep.equal(470);
+    expect(allDestinations.getDestinationCost(destination, 1, 1)).to.deep.equal(517);
   });
 
   it('it should calculate estimated travel cost for groups', function() {
-    expect(allDestinations.getDestinationCost(destination, 10, 10)).to.deep.equal(4700);
+    expect(allDestinations.getDestinationCost(destination, 10, 10)).to.deep.equal(5170);
   });
 });
