@@ -6,16 +6,120 @@
 .agent-nav {
   width: 85vw;
   height: 10vh;
-  background: white;
+  background: $icon-color;
   border-radius: 3vh;
-  margin: 2vh;
+  margin-top: 3vh;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+
+  .page-title {
+    font-size: 4vh;
+    padding: 2vw;
+  }
+
+  .agency-income {
+    font-size: 3vh;
+    padding: 2vw;
+  }
 }
 
 .agent-data-container {
-  width: 90vw;
+  width: 95vw;
   height: 70vh;
   margin: 2vh;
-  background: lightblue;
+  background: $shiny-border;
   border-radius: 3vh;
   @include flexed(row)
+}
+
+.trip-requests {
+  background: $main-color;
+  width: 30vw;
+  height: 70vh;
+  border-radius: 3vh;
+  display: flex;
+  flex-direction: column;
+
+  .request-title {
+    font-size: 3vh;
+    text-align: center;
+    font-weight: bold;
+  }
+
+  .pending-trip-container {
+    background: $main-color;
+    width: 30vw;
+    height: 63vh;
+    margin-top: 1vh;
+  }
+}
+
+.users-traveling {
+  @extend .trip-requests;
+}
+
+.all-users {
+  @extend .trip-requests;
+}
+
+.pending-trip-container {
+  overflow: scroll;
+  pointer-events: auto;
+  text-align: center;
+}
+
+.pending-cards {
+  border: 1px solid black;
+  margin: 1vh;
+  border-radius: 3vh;
+  color: $icon-color;
+  background: lighten($primary-background, 10%);
+  p {
+    margin: 1vh;
+  }
+}
+
+.btn-box {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 1vh;
+}
+
+.cancel-trip {
+  margin: 0;
+  background: $confirmation;
+}
+
+.approve-trip {
+  margin: 0;
+  background: $shiny-border;
+}
+
+.users-traveling {
+  @extend .trip-requests;
+  pointer-events: auto;
+
+  .traveling-now-title {
+    @extend .request-title;
+  }
+  
+  .traveling-now-container {
+    overflow: scroll;
+  }
+}
+
+.current-traveler-cards {
+  @extend .pending-cards;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  font-size: 3vh;
+  letter-spacing: .1vh;
+}
+
+.all-users {
+  @include flexed(column);
 }
