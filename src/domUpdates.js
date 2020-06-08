@@ -4,10 +4,47 @@ import moment from 'moment';
 class DomUpdates {
   constructor() {}
   
-  displayAgentDashboard() {
+  displayAgentDashboard(agent) {
+    console.log(agent)
     $('.login-page').addClass('hidden')
     $('.agent-dashboard').removeClass('hidden')
     $('.log-out-btn').removeClass('invisible')
+    $('.agency-income').html(`Agency Revenue Year 2020: $${agent.calculateTotalYearIncome()}`)
+    this.displayPendingTripsAgent(agent)
+    this.displayCurrentlyTraveling(agent)
+
+  }
+
+  displayCurrentlyTraveling(agent) {
+    agent.getAllUsersOnTrips().forEach(traveler => {
+      console.log(traveler, 'traveler in forEach')
+      $('.traveling-now-container').prepend(`
+      <section class="current-traveler-cards">
+        <p class="traveler-name">${traveler.travelerName.name}</p>
+        <p class="traveler-location">${traveler.destination}</p>
+        <p class="crew-size">Party Size: ${traveler.travelers}</p>
+      </section>
+      `)
+    })
+  }
+
+  displayPendingTripsAgent(agent) {
+    agent.getAllPendingTrips().forEach(trip => {
+      $('.pending-trip-container').prepend(`
+      <section class="pending-cards">
+        <p class="trip-id">Locator # ${trip.id}</p>
+        <p class="user-name-trip">Traveler: ${trip.travelerName.name}</p>
+        <p class="user-trip-location">Destination: ${trip.destination}</p>
+        <p class="departure-date">Departure Date: ${trip.date}</p>
+        <p class="trip-duration">Duration: ${trip.duration} days</p>
+        <p class="group-size">Group Size: ${trip.travelers}</p>
+        <p class="current-status">Status: ${trip.status}</p>
+        <section class="btn-box"> 
+          <button class='cancel-trip'>CANCEL</button>
+          <button class='approve-trip'>APPROVE</button>
+        </section>
+      </section>`)
+    })
   }
   
   displayUserDashboard(user) {
