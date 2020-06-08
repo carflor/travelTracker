@@ -85,16 +85,39 @@
   display: flex;
   justify-content: space-around;
   margin-bottom: 1vh;
-}
 
-.cancel-trip {
-  margin: 0;
-  background: $confirmation;
-}
+  .cancel-trip {
+    margin: 0;
+    background: $confirmation;
+    &:hover {
+      border-radius: 10px;
+      border: 1px solid darken($button-color, 30%);
+      background-color: lighten($primary-background, 40%);
+    }
+  
+    &:focus {
+      border-radius: 10px;
+      border: 1px solid darken($button-color, 30%);
+      background-color: lighten($primary-background, 40%);
+    }
+  }
+  
+  .approve-trip {
+    margin: 0;
+    background: $shiny-border;
 
-.approve-trip {
-  margin: 0;
-  background: $shiny-border;
+    &:hover {
+      border-radius: 10px;
+      border: 1px solid darken($button-color, 30%);
+      background-color: lighten($primary-background, 40%);
+    }
+  
+    &:focus {
+      border-radius: 10px;
+      border: 1px solid darken($button-color, 30%);
+      background-color: lighten($primary-background, 40%);
+    }
+  }
 }
 
 .users-traveling {
@@ -104,7 +127,7 @@
   .traveling-now-title {
     @extend .request-title;
   }
-  
+
   .traveling-now-container {
     overflow: scroll;
   }
@@ -122,4 +145,39 @@
 
 .all-users {
   @include flexed(column);
+}
+
+.all-travelers-container {
+  overflow: scroll;
+  pointer-events: auto;
+  width: 44vh;
+
+  .user-card {
+    @include flexed(row);
+    background: darken($faded-color, 5%);
+    margin: 1vh;
+    border-radius: 3vh;
+    padding: 1vh;
+
+    .user-name {
+      text-size: 2vh;
+    }
+  }
+}
+
+.all-details {
+  width: 18vh;
+  margin-right: 1vh;
+
+  &:hover {
+    border-radius: 10px;
+    border: 1px solid darken($button-color, 30%);
+    background-color: lighten($primary-background, 40%);
+  }
+
+  &:focus {
+    border-radius: 10px;
+    border: 1px solid darken($button-color, 30%);
+    background-color: lighten($primary-background, 40%);
+  }
 }

@@ -31,23 +31,25 @@ nav {
 button {
   color: $primary-background;
   background-color: lighten($button-color, 30%);
-  border-radius: 10px;
+  border-radius: 3vh;
   border: outset;
-  padding: 5px;
-  margin-right: 3em;
-  width: 8em;
-  height: 3.3em;
-  font-size: .9em;
-  letter-spacing: 1px;
+  padding: 1.5vh;
+  margin-right: 1.5vh;
+  width: 16vh;
+  height: 6.7vh;
+  font-size: 1.8vh;
+  letter-spacing: .1vh;
   font-weight: 700;
   box-shadow: -1px -1px 6px $shadow;
   pointer-events: auto;
+
   &:hover {
-    border-radius: 10px;
+    border-radius: 1.3vh;
     border: 1px solid darken($button-color, 30%);
   }
+
   &:focus {
-    border-radius: 10px;
+    border-radius: 1.3vh;
     border: 1px solid darken($button-color, 30%);
   }
 }

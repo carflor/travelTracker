@@ -12,12 +12,22 @@ class DomUpdates {
     $('.agency-income').html(`Agency Revenue Year 2020: $${agent.calculateTotalYearIncome()}`)
     this.displayPendingTripsAgent(agent)
     this.displayCurrentlyTraveling(agent)
+    this.displayAllUsers(agent)
+  }
 
+  displayAllUsers(agent) {
+    agent.allTravelers.allTravelers.forEach(traveler => {
+      $('.all-travelers-container').prepend(`
+      <section class="user-card">
+        <p class="user-name">${traveler.name}</p>
+        <button class="all-details">View Details</button>
+      </section>
+      `)
+    })
   }
 
   displayCurrentlyTraveling(agent) {
     agent.getAllUsersOnTrips().forEach(traveler => {
-      console.log(traveler, 'traveler in forEach')
       $('.traveling-now-container').prepend(`
       <section class="current-traveler-cards">
         <p class="traveler-name">${traveler.travelerName.name}</p>
