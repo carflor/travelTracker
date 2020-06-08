@@ -113,7 +113,7 @@ describe('Agent', function() {
   });
 
   it('it should calculate estimated yearly income for agency', function() {
-    expect(agent.calculateTotalYearIncome()).to.equal(18125);
+    expect(agent.calculateTotalYearIncome()).to.equal(165);
   });
 
   it('it should search users by name', function() {

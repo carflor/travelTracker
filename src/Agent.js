@@ -24,7 +24,7 @@ class Agent {
     return yearTrips.reduce((acc, trip) => {
       acc += trip.flightCost * trip.travelers
       acc += trip.dailyLodging * trip.duration
-      return acc
+      return Math.floor(acc * .1)
     }, 0)
   }
 
