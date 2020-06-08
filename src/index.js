@@ -23,7 +23,6 @@ import DomUpdates from './domUpdates';
 import Traveler from './Traveler';
 import Agent from './Agent';
 import Trip from './Trip';
-import Domupdates from './domUpdates';
 
 let domUpdates = new DomUpdates()
 let travelersRepo;
@@ -39,25 +38,25 @@ const fetchApiData = () => {
   const destinationsData = api.getDestinations();
   
   Promise.all([travelersData, destinationsData, tripsData])
-    .then(dataSet => dataSet = {
-      travelersData: dataSet[0].travelers,
-      destinationsData: dataSet[1].destinations, 
-      tripsData: dataSet[2].trips.map(function(trip) {
-        return {
-          ...trip, 
-          travelerName: dataSet[0].travelers.find(traveler => traveler.id === trip.userID).name,
-          dailyLodging: dataSet[1].destinations.find(city => city.id === trip.destinationID).estimatedLodgingCostPerDay,
-          flightCost: dataSet[1].destinations.find(city => city.id === trip.destinationID).estimatedFlightCostPerPerson,
-          destination: dataSet[1].destinations.find(city => city.id === trip.destinationID).destination
-        } 
-      })
-      ,
-    }).then(dataSet => {
-      const allTravelers = dataSet.travelersData;
-      const allTrips = dataSet.tripsData;
-      const allDestinations = dataSet.destinationsData;
-      start(allTravelers, allDestinations, allTrips)
-    }).catch(error => console.log(error.message))
+  .then(dataSet => dataSet = {
+    // why is line 48 not like .name chained to it !?!?!?!?!?!?
+    travelersData: dataSet[0].travelers,
+    destinationsData: dataSet[1].destinations, 
+    tripsData: dataSet[2].trips.map(function(trip) {
+      return {
+        ...trip, 
+        travelerName: dataSet[0].travelers.find(traveler => traveler.id === trip.userID),
+        dailyLodging: dataSet[1].destinations.find(city => city.id === trip.destinationID).estimatedLodgingCostPerDay,
+        flightCost: dataSet[1].destinations.find(city => city.id === trip.destinationID).estimatedFlightCostPerPerson,
+        destination: dataSet[1].destinations.find(city => city.id === trip.destinationID).destination,
+      } 
+    })
+  }).then(dataSet => {
+    let allTravelers = dataSet.travelersData
+    let allDestinations = dataSet.destinationsData
+    let allTrips = dataSet.tripsData
+    start(allTravelers, allDestinations, allTrips)
+  }).catch(error => console.log(error.message))
 }
 
 // APP START - instantiations
@@ -87,18 +86,19 @@ function loadTraveler(id) {
   let trips = tripsRepo.dataPerUser
   let currentUser = travelersRepo.getTravelerById(id)
   user = new Traveler(currentUser, trips[id.toString()])
-  console.log(user, 'user instance in LOAD')
   domUpdates.displayUserDashboard(user)
+  console.log(user, 'user instance in LOAD')
 }
 
 function loadAgent() {
-  let agent = new Agent(travelersRepo, tripsRepo, destinationsRepo)
-  domUpdates.displayAgentDashboard()
+  let agent = new Agent(travelersRepo, tripsRepo.allTrips, destinationsRepo)
+  domUpdates.displayAgentDashboard(agent)
   console.log(agent, 'AGENT IN LOAD')
 }
 
 // EVENT HANDLERS
 $('.log-out-btn').click(() => location.reload(true))
+
 $('.user-dashboard').click((event) => userBtnHandler(event))
 
 const userBtnHandler = (event) => {
