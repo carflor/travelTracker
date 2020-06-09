@@ -43,7 +43,6 @@ describe('Traveler', function() {
   });
 
   it('it should get list of trips for this year', function() {
-    console.log(traveler, 'in test')
     expect(traveler.getTripsThisYear()).to.deep.equal(traveler.yearsTrips)
   });
 
@@ -65,9 +64,5 @@ describe('Traveler', function() {
       "status": "approved",
       "suggestedActivities": []
     }]);
-  });
-
-  it.skip('it should set object for post trip request', function() {
-    expect().to.deep.equal();
   });
 });
