@@ -177,3 +177,45 @@
     background-color: lighten($primary-background, 40%);
   }
 }
+
+.show-user-full-history {
+  width: 70vw;
+  height: 85vh;
+  position: absolute;
+  background: $icon-color;
+  border: 1vh solid $room-color;
+  border-radius: 3vh;
+  pointer-events: auto;
+  z-index: 100;
+  @include flexed(column, space-evenly);
+}
+
+.user-detail-container {
+  width: 50vw;
+  height: 5vh;
+  border-radius: 3vh;
+  background: $main-color;
+  @include flexed(row, space-around);
+
+  p {
+    font-size: 3vh;
+  }
+}
+
+.history-data-container {
+  @include flexed(row, space-around);
+  width: 66vw;
+}
+
+.traveler-history-box {
+  width: 30vw;
+  height: 65vh;
+  background: pink;
+  border-radius: 3vh;
+  overflow: scroll;
+}
+
+.future-trips-box {
+  @extend .traveler-history-box;
+}
+

@@ -5,7 +5,7 @@
 }
 
 // perhaps un-nest these a bit and style per class name
-
+// translate all px to vh
 .form {
   width: 350px;
   padding: 40px 40px 60px;
@@ -13,18 +13,22 @@
   background: $button-color;
   text-align: center;
   box-shadow: -1px -1px 6px $shadow;
+  
   h2 {
     color: $primary-background;
     text-transform: uppercase;
     letter-spacing: 4px;
   }
+
   .input {
     letter-spacing: 1px;
     margin-top: 40px;
     text-align: left;
     pointer-events: auto;
+
     .inputBox {
       margin-top: 20px;
+
       input {
         width: 100%;
         pointer-events: auto;
@@ -35,14 +39,17 @@
         padding: 5px 10px;
         font-size: 18px;
         border-bottom: 1px solid $main-color;
+
         &::placeholder {
           color: $faded-color;
           font-size: 18px;
         }
+
         &:hover {
           border-radius: 3px;
           border: 1px solid $faded-color;
         }
+
         &:focus {
           border-radius: 3px;
           border: 1px solid $faded-color;
