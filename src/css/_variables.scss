@@ -10,9 +10,9 @@ $confirmation: lighten(#ff0000e3, 20%);
 $header-font: 'Sriracha', cursive;
 $text-font: 'Rubik', sans-serif;
 
-@mixin flexed($direction) {
+@mixin flexed($direction, $justified) {
   display: flex;
   flex-direction: $direction;
-  justify-content: space-between;
+  justify-content: $justified;
   align-items: center;
 }

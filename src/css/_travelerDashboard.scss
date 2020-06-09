@@ -6,7 +6,8 @@
   margin-top: 6vh;
   border-radius: 3vh;
   box-shadow: $shadow;
-  @include flexed(column);
+  @include flexed(column, space-between);
+
   button {
     color: lighten($button-color, 20%);
     background-color: lighten($primary-background, 10%);
@@ -97,10 +98,7 @@
   border: 3px solid $shiny-border;
   margin-top: 6vh;
   border-radius: 3vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
+  @include flexed(column, center);
 }
 
 .trip-card {
@@ -250,7 +248,7 @@
 }
 
 .form-btn-container {
-  @include flexed(row)
+  @include flexed(row, space-between)
 }
 
 .confirm-trip {
@@ -258,10 +256,7 @@
   
   .confirmation-container {
     height: 41vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    align-items: center;
+    @include flexed(column, space-around)
   }
   
   .confirm-this-trip {
