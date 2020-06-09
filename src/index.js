@@ -29,6 +29,7 @@ let travelersRepo;
 let destinationsRepo;
 let tripsRepo;
 let user;
+let agent;
 
 // ApiFetch
 const fetchApiData = () => {
@@ -91,15 +92,14 @@ function loadTraveler(id) {
 }
 
 function loadAgent() {
-  let agent = new Agent(travelersRepo, tripsRepo.allTrips, destinationsRepo)
+  agent = new Agent(travelersRepo, tripsRepo.allTrips, destinationsRepo)
   domUpdates.displayAgentDashboard(agent)
-  console.log(agent, 'AGENT IN LOAD')
 }
 
 // EVENT HANDLERS
 $('.log-out-btn').click(() => location.reload(true))
-
 $('.user-dashboard').click((event) => userBtnHandler(event))
+$('.agent-dashboard').click((event) => agentBtnHandler(event))
 
 const userBtnHandler = (event) => {
   if (event.target.classList.contains('current-trips')) {
@@ -120,9 +120,6 @@ const userBtnHandler = (event) => {
   } else if (event.target.classList.contains('plan-new-trip')) {
     domUpdates.displayDestinationsSearch()
     domUpdates.displayUserDestinations(destinationsRepo.destinations, '.location-container')
-    console.log(destinationsRepo, 'global destinations')
-    console.log(travelersRepo, 'global travelers')
-    console.log(tripsRepo, 'global trips')
   } else if (event.target.classList.contains('calculate-estimate')) {
     domUpdates.displayBookingPage(event)
     // insert date value here for tomorrow as earliest travel plan
@@ -137,16 +134,36 @@ const userBtnHandler = (event) => {
     $('.confirm-trip').addClass('hidden')
     $('.book-form').removeClass('hidden')
   } else if (event.target.classList.contains('confirm-this-trip')) {
-    // does this btn need this? 
+    // triggers POST for trip to be pending
+    // NEEDS TO UPDATE DATA ON USER PAGE AFTER POST
+    userPost(event, user, destinationsRepo)
+    domUpdates.finishUserConfirmation()
+    domUpdates.displayUserDashboard(user)
   }
 }
 
-// $('.new-trip-container').click((event) => newTripHandler(event))
-// const newTripHandler = (event) => {
-//   if (event.target.classList.contains('')) {
-
-//   }
-// } 
+const agentBtnHandler = (event) => {
+  if (event.target.classList.contains('all-details')) {
+    // should show pop up with all data for whatever user got picked
+    $('.show-user-full-history').removeClass('hidden')
+    $('.agent-nav').addClass('blur')
+    $('.agent-data-container').addClass('blur')
+    // triggers function taht grabs matching data from 
+    domUpdates.displayUserHistoryDetails(event, agent)
+    // name on event target 
+    // grabs the total invested amount for that customer 
+    // grabs all customer flights 
+    // if flights are in future - place a CANCEL button on them
+  } else if (event.target.classList.contains('history-back-btn')) {
+    $('.show-user-full-history').addClass('hidden')
+    $('.agent-nav').removeClass('blur')
+    $('.agent-data-container').removeClass('blur')
+  } else if (event.target.classList.contains('cancel-trip')) {
+    // triggers fn for POST CANCELLED 
+  } else if (event.target.classList.contains('approve-trip')) {
+    // triggers fn for POST APPROVE
+  }
+}
 
 // SEARCH FUNCTION
 $('#search').on('keyup', function searchPlaces(event) {
@@ -172,5 +189,61 @@ function searchDestinations(str) {
     return filteredCities;
   }
 }
+
+$('#search-users').on('keyup', function searchUsers(event) {
+  const searchValue = event.target.value.toLowerCase();
+  if (searchValue != '') {
+    $('.all-travelers-container').html('')
+    let searchResults = agent.searchByUserName(searchValue)
+    let results = []
+    searchResults.forEach(user => {
+      results.push(user)
+    })
+    domUpdates.displaySearchedUsers(results)
+  } 
+  if (!searchValue) {
+    domUpdates.displayAllUsers(agent)
+  }
+})
+
+//USER POST
+function userPost() {
+  const userId = user.id
+  const destination = $(event.target).closest('.confirmation-container').find('.confirm-location').html()
+  const formatDestination = destination.split(': ')[1]
+  const destinationMatch = destinationsRepo.destinations.filter(destination => destination.destination === formatDestination)
+  const destinationId = destinationMatch[0].id
+  const groupSize = $(event.target).closest('.confirmation-container').find('.confirm-party-size').html()
+  const formatGroupSize = +groupSize.split(': ')[1]
+  const travelDate = $(event.target).closest('.confirmation-container').find('.confirm-start-date').html()
+  const formatTravelDate = moment(travelDate.split(': ')[1], "YYYY/MM/DD")
+  const returnDate = $(event.target).closest('.confirmation-container').find('.confirm-return-date').html()
+  const formatReturnDate = moment(returnDate.split(': ')[1], "YYYY/MM/DD")
+  const dayAmount = formatReturnDate.diff(formatTravelDate, 'days')
+  console.log(dayAmount)
+
+  if (dayAmount) {
+    let travelObj = {
+      "userID": userId,
+      "destinationID": destinationId,
+      "travelers": formatGroupSize,
+      "date": formatTravelDate,
+      "duration": dayAmount,
+      "status": "pending",
+      "suggestedActivities": []
+    }
+    const travelRequest = new Trip(travelObj)
+    const api = new ApiFetch();
+
+    // THIS IS NOT UPDATING THE PAGE AS EXPECTED!?!?
+    api.postTripRequest(travelRequest)
+    .then(() => api.getTravelerById(userId))
+    .then(response => loadTraveler(response.id))
+    .catch(err => console.log(err))
+    // .then(() => api.getTrips())
+    }
+    // .then(response => domUpdates.displayUserDashboard(response))
+}
+
 
 fetchApiData();
