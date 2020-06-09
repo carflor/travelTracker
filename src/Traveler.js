@@ -9,8 +9,6 @@ class Traveler {
     this.futureTrips = this.getFutureTrips()
   }
   
-  // method for show upcoming trips
-  // add display on dom functionality
   getFutureTrips() {
     let today = moment().format("YYYY/MM/DD")
     return this.tripHistory.reduce((acc, trip) => {
@@ -44,8 +42,6 @@ class Traveler {
     }, [])
   }
 
-  // method for calculating pending trips
-  // add domdisplay fn for this method
   getPendingTrips() {
     return this.tripHistory.filter(trip => trip.status === 'pending')
   }
@@ -56,20 +52,22 @@ class Traveler {
     // console.log(this.tripHistory, 'ERROR LOG')
     return this.tripHistory.reduce((acc, trip) => {
       let tripDate = trip.date
-      if (moment(tripDate).isBetween(firstDayYear, lastDayYear)) {
+      if (moment(tripDate).isBetween(firstDayYear, lastDayYear) && trip.travelerName.id === this.id) {
         acc.push(trip)
       }
       return acc
     }, [])
   }
 
-  //add dom display fn for this method
   getAmountSpentThisYear() {
-    return this.yearsTrips.reduce((acc, trip) => {
-      acc += trip.duration * trip.dailyLodging
-      acc += trip.flightCost * trip.travelers
-      return Math.floor(acc += (acc * .1))
+    let yearAmount = this.yearsTrips.reduce((acc, trip) => {
+      const lodging = trip.duration * trip.dailyLodging
+      const totalFlight = trip.flightCost * trip.travelers
+      const total = lodging + totalFlight
+      const percent = total * .1
+      return acc += percent + total
     }, 0)
+    return yearAmount.toFixed(2)
   }
 }
 
