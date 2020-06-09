@@ -1,11 +1,11 @@
 import $ from 'jquery';
 import moment from 'moment';
+import Traveler from './Traveler'
 
 class DomUpdates {
   constructor() {}
   
   displayAgentDashboard(agent) {
-    console.log(agent)
     $('.login-page').addClass('hidden')
     $('.agent-dashboard').removeClass('hidden')
     $('.log-out-btn').removeClass('invisible')
@@ -17,6 +17,17 @@ class DomUpdates {
 
   displayAllUsers(agent) {
     agent.allTravelers.allTravelers.forEach(traveler => {
+      $('.all-travelers-container').prepend(`
+      <section class="user-card">
+        <p class="user-name">${traveler.name}</p>
+        <button class="all-details">View Details</button>
+      </section>
+      `)
+    })
+  }
+
+  displaySearchedUsers(searchResults) {
+    searchResults.forEach(traveler => {
       $('.all-travelers-container').prepend(`
       <section class="user-card">
         <p class="user-name">${traveler.name}</p>
@@ -38,6 +49,7 @@ class DomUpdates {
     })
   }
 
+  // DUPLICATES ISSUE ON THIS FN?!?
   displayPendingTripsAgent(agent) {
     agent.getAllPendingTrips().forEach(trip => {
       $('.pending-trip-container').prepend(`
@@ -72,12 +84,13 @@ class DomUpdates {
   }
   
   displayTripCards(arr, divClass) {
+    // I ADDED TRIP.DATE TO LINE 92 to see if it fixes data error on display
     if (arr && divClass) {
       arr.forEach(trip => {
         $(divClass).prepend(` 
-            <section class="trip-card">
+          <section class="trip-card">
             <p class="destination">${trip.destination}</p>
-            <p class="dates">${trip.date} to ${moment().add(trip.duration, 'day').format('YYYY/MM/DD')}</p>
+            <p class="dates">${trip.date} to ${moment(trip.date).add(trip.duration, 'day').format('YYYY/MM/DD')}</p>
             <p class="day-amount">Duration: ${trip.duration} days</p>
             <section class="card-bottom">
               <p class="group-size">Party Size: ${trip.travelers}</p>
@@ -103,9 +116,50 @@ class DomUpdates {
           </section>
         `)
       })
-
     }
   }
+
+  displayUserHistoryDetails(event, agent) {
+    const clickedUserName = $(event.target).closest('.user-card').find('.user-name').html()
+    const userData = agent.allTravelers.allTravelers.find(traveler => traveler.name === clickedUserName)
+    const foundUser = new Traveler(userData, agent.allTrips)
+    console.log(foundUser, 'instantiation')
+    $('.user-name-title').html(`${foundUser.name}`)
+    $('.user-traveling-costs').html(`Year Investment: $${foundUser.getAmountSpentThisYear()}`)
+    this.displayUserUpcomingTrips(foundUser)
+    this.displayUserFullTripHistory(foundUser)
+  }
+
+  displayUserFullTripHistory(user) {
+    let usersHistory = user.tripHistory.filter(trip => trip.userID === user.id)
+    usersHistory.forEach(trip => {
+      $('.insert-history-trips').prepend(`
+        <section class="history-trip-card">
+          <p class="future-location">${trip.destination}</p>
+          <p class="future-date">${trip.date}</p>
+          <p class="history-duration">${trip.duration}</p>
+          <p class="history-group-size">${trip.travelers}</p>
+          <p class="confirmation-num">${trip.id}</p>
+        </section>
+      `)
+    })
+  }
+
+  displayUserUpcomingTrips(user) {
+    let usersFuture = user.futureTrips.filter(trip => trip.userID === user.id)
+    usersFuture.forEach(trip => {
+      $('.insert-future-trips').prepend(`
+        <section class="future-trip-card">
+          <section class="future-data-box">
+            <p class="future-location">${trip.destination}</p>
+            <p class="future-date">${trip.date}</p>
+            <p class="confirmation-num">${trip.id}</p>
+          </section>
+          <button class="cancel-future-btn">CANCEL</button>
+        </section>
+      `)
+    })
+  } 
 
   displayTravelHistory() {
     $('.travel-history-container').removeClass('hidden')
@@ -149,6 +203,12 @@ class DomUpdates {
     $('.confirm-party-size').html(`Number of Travelers: ${partySize}`)
     $('.book-form').addClass('hidden')
     $('.confirm-trip').removeClass('hidden')
+  }
+
+  finishUserConfirmation() {
+    $('.confirm-trip').addClass('hidden')
+    $('.traveler-details-box').removeClass('blur')
+    $('.new-trip-container').removeClass('blur')
   }
 
   incorrectLogin() {
