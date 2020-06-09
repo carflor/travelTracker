@@ -5,10 +5,21 @@ class Agent {
     this.allTravelers = travelers;
     this.allTrips = trips;
     this.allDestinations = destinations;
+    this.yearsTrips = this.grabTripsForYear();
+  }
+
+  getAllPendingTrips() {
+    let result = []
+    this.allTrips.forEach(trip => {
+      if (trip.status === 'pending') {
+        result.push(trip)
+      }
+    })
+    return result
   }
 
   grabTripsForYear() {
-    let yearAgo = moment().subtract(365, 'day').format("YYYY/MM/DD")
+    let yearAgo = moment("2020/01/01").format("YYYY/MM/DD")
     let tomorrow = moment().add(1, 'day').format("YYYY/MM/DD")
     return this.allTrips.allTrips.reduce((acc, trip) => {
       let tripDate = trip.date
@@ -21,11 +32,13 @@ class Agent {
 
   calculateTotalYearIncome() {
     let yearTrips = this.grabTripsForYear()
-    return yearTrips.reduce((acc, trip) => {
-      acc += trip.flightCost * trip.travelers
-      acc += trip.dailyLodging * trip.duration
-      return Math.floor(acc * .1)
+    let tripsIncome = yearTrips.reduce((acc, trip) => {
+      let flights = trip.flightCost * trip.travelers
+      let lodgings = trip.dailyLodging * trip.duration
+      let total = (flights + lodgings) * .1
+      return acc += total
     }, 0)
+    return +tripsIncome.toFixed(2)
   }
 
   searchByUserName(str) {
