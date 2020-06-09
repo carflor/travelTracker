@@ -1,0 +1,253 @@
+.agent-dashboard {
+  display: flex;
+  flex-direction: column;
+}
+
+.agent-nav {
+  width: 85vw;
+  height: 10vh;
+  background: $icon-color;
+  border-radius: 3vh;
+  margin-top: 3vh;
+  @include flexed(row, space-between);
+
+  .page-title {
+    font-size: 4vh;
+    padding: 2vw;
+  }
+
+  .agency-income {
+    font-size: 3vh;
+    padding: 2vw;
+  }
+}
+
+.agent-data-container {
+  width: 95vw;
+  height: 70vh;
+  margin: 2vh;
+  background: $shiny-border;
+  border-radius: 3vh;
+  @include flexed(row, space-between);
+}
+
+.trip-requests {
+  background: $main-color;
+  width: 30vw;
+  height: 70vh;
+  border-radius: 3vh;
+  display: flex;
+  flex-direction: column;
+
+  .request-title {
+    font-size: 3vh;
+    text-align: center;
+    font-weight: bold;
+  }
+
+  .pending-trip-container {
+    background: $main-color;
+    width: 30vw;
+    height: 63vh;
+    margin-top: 1vh;
+  }
+}
+
+.users-traveling {
+  @extend .trip-requests;
+}
+
+.all-users {
+  @extend .trip-requests;
+}
+
+.pending-trip-container {
+  overflow: scroll;
+  pointer-events: auto;
+  text-align: center;
+}
+
+.pending-cards {
+  border: 1px solid black;
+  margin: 1vh;
+  border-radius: 3vh;
+  color: $icon-color;
+  background: lighten($primary-background, 10%);
+  p {
+    margin: 1vh;
+  }
+}
+
+.btn-box {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 1vh;
+
+  .cancel-trip {
+    margin: 0;
+    background: $confirmation;
+    
+    &:hover {
+      border-radius: 10px;
+      border: 1px solid darken($button-color, 30%);
+      background-color: lighten($primary-background, 40%);
+    }
+  
+    &:focus {
+      border-radius: 10px;
+      border: 1px solid darken($button-color, 30%);
+      background-color: lighten($primary-background, 40%);
+    }
+  }
+  
+  .approve-trip {
+    margin: 0;
+    background: $shiny-border;
+
+    &:hover {
+      border-radius: 10px;
+      border: 1px solid darken($button-color, 30%);
+      background-color: lighten($primary-background, 40%);
+    }
+  
+    &:focus {
+      border-radius: 10px;
+      border: 1px solid darken($button-color, 30%);
+      background-color: lighten($primary-background, 40%);
+    }
+  }
+}
+
+.users-traveling {
+  @extend .trip-requests;
+  pointer-events: auto;
+
+  .traveling-now-title {
+    @extend .request-title;
+  }
+
+  .traveling-now-container {
+    overflow: scroll;
+  }
+}
+
+.current-traveler-cards {
+  @extend .pending-cards;
+  @include flexed(column, center);
+  font-size: 3vh;
+  letter-spacing: .1vh;
+}
+
+.all-users {
+  @include flexed(column, space-between);
+}
+
+.all-travelers-container {
+  overflow: scroll;
+  pointer-events: auto;
+  width: 44vh;
+  justify-content: space-around;
+
+  .user-card {
+    @include flexed(row, space-between);
+    background: darken($faded-color, 5%);
+    margin: 1vh;
+    border-radius: 3vh;
+    padding: 1vh;
+
+    .user-name {
+      text-size: 2vh;
+    }
+  }
+}
+
+.all-details {
+  width: 18vh;
+  margin-right: 1vh;
+
+  &:hover {
+    border-radius: 10px;
+    border: 1px solid darken($button-color, 30%);
+    background-color: lighten($primary-background, 40%);
+  }
+
+  &:focus {
+    border-radius: 10px;
+    border: 1px solid darken($button-color, 30%);
+    background-color: lighten($primary-background, 40%);
+  }
+}
+
+.show-user-full-history {
+  width: 70vw;
+  height: 85vh;
+  position: absolute;
+  background: $icon-color;
+  border: 1vh solid $dark-color;
+  border-radius: 3vh;
+  pointer-events: auto;
+  z-index: 100;
+  @include flexed(column, space-evenly);
+}
+
+.user-detail-container {
+  width: 50vw;
+  height: 5vh;
+  border-radius: 3vh;
+  background: $main-color;
+  @include flexed(row, space-around);
+
+  p {
+    font-size: 3vh;
+  }
+}
+
+.history-data-container {
+  @include flexed(row, space-around);
+  width: 66vw;
+}
+
+.traveler-history-box {
+  width: 30vw;
+  height: 65vh;
+  background: $fun-background;
+  border-radius: 3vh;
+  overflow: scroll;
+  text-align: center;
+
+  .history-title, .future-title {
+    font-size: 3vh;
+    font-weight: bold;
+    margin: 1vh;
+  }
+
+  .history-trip-card {
+    border: 1px solid black;
+    border-radius: 2vh;
+    @include flexed(column, space-around);
+    margin: 1vh;
+    padding: 1vh;
+    background: $main-color;
+    color: $dark-color;
+  }
+}
+
+.future-trips-box {
+  @extend .traveler-history-box;
+
+  .future-trip-card {
+    border: 1px solid black;
+    border-radius: 2vh;
+    @include flexed(row, space-between);
+    margin: 1vh;
+    padding: 1vh;
+    background: $main-color;
+    color: $dark-color;
+  }
+
+  button {
+    background: $confirmation;
+  }
+}
+
+

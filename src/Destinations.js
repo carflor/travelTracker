@@ -10,7 +10,9 @@ class Destinations {
   getDestinationCost(locationObj, groupAmount, dayAmount) {
     let lodging = locationObj.estimatedLodgingCostPerDay * dayAmount
     let flight = locationObj.estimatedFlightCostPerPerson * groupAmount
-    return lodging + flight
+    let total = lodging + flight
+    let agencyPercent = total * 0.1
+    return total + agencyPercent
   }
 }
 

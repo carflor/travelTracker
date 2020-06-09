@@ -8,7 +8,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Sriracha&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;500;700&display=swap" rel="stylesheet">
     <title>Travel Tracker Project</title>
-    <!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
   </head>
   <body>
     <nav>
@@ -26,7 +25,7 @@
         <section class="input">
           <section class="inputBox">
             <label>Username</label>
-            <input class="username-input" type="text" placeholder="Enter Traveler Id" value="traveler2">
+            <input class="username-input" type="text" placeholder="Enter Traveler Id" value="agent">
           </section>
           <section class="inputBox">
             <label>Password</label>
@@ -39,52 +38,102 @@
       </section>
     </main>
     <main class="agent-dashboard hidden">
-      <!-- INSERT AGENT BOXES HERE -->
+      <section class="agent-nav">
+        <p class="page-title">Manager Portal</p>
+        <p class="agency-income"></p>
+      </section>
+      <section class="agent-data-container">
+        <section class="trip-requests">
+          <p class="request-title">Pending Trips</p>
+          <section class="pending-trip-container"></section>
+        </section>
+        <section class="users-traveling">
+          <p class="traveling-now-title">Currently Traveling</p>
+          <section class="traveling-now-container"></section>
+        </section>
+        <section class="all-users">
+          <form class="search-container" tabindex="0">
+            <label for="search"></label>
+            <input id="search-users" class="search-bar" type="search" placeholder="Search travelers..." aria-label="search-input" />
+            <img class="search-icon" src="https://img.icons8.com/color/48/000000/search.png" alt="search-icon"/>
+          </form>
+          <section class="all-travelers-container"></section>
+        </section>
+      </section>
+      <section class="show-user-full-history hidden">
+        <section class="manager-user-form">
+          <section class="user-detail-container">
+            <p class="user-name-title"></p>
+            <p class="user-traveling-costs"></p>
+          </section>
+        </section>
+        <section class="history-data-container">
+          <section class="traveler-history-box">
+            <p class="history-title">Traveler Trip History</p>
+            <section class="insert-history-trips"></section>
+          </section>
+          <section class="future-trips-box">
+            <p class="future-title">Upcoming Trips</p>
+            <section class="insert-future-trips"></section>
+          </section>
+        </section>
+        <section class="history-btn-container">
+          <button class="history-back-btn">BACK</button>
+        </section>
+      </section>
     </main>
     <main class="user-dashboard hidden">
       <section class="traveler-details-box">
         <section class="welcome-message"></section>
         <button class="plan-new-trip">Book A Trip</button>
-        <button class="history-button">Travel History</button>
+        <button class="history-button">My Trips</button>
         <section class="travel-points"></section>
       </section>
       <section class="travel-history-container">
         <section class="button-container">
+          <button class="all-trips">View All</button>
           <button class="current-trips">Pending</button>
           <button class="past-trips">Past Trips</button>
           <button class="upcoming-trips">Upcoming</button>
         </section>
-        <section class="trips-box">
-          <!-- MOCK DATA PLACED HERE -- INSERT HTML HERE -->
-        </section>
+        <section class="trips-box"></section>
       </section>
       <section class="new-trip-container hidden">
         <form class="search-container" tabindex="0">
           <label for="search"></label>
-          <input id="search" class="search-bar" type="search" placeholder="Search destinations..." aria-label="search-input"/>
+          <input id="search" class="search-bar" type="search" placeholder="Search destinations..." aria-label="search-input" />
           <img class="search-icon" src="https://img.icons8.com/color/48/000000/search.png" alt="search-icon"/>
         </form>
-        <section class="location-container">
-          <section class="location-card">
-            <p class="location-name">Athens, Greece</p>
-            <!-- SPACE FOR IMAGE -->
-            <img class="location-img">
-            <section class="location-card-bottom">
-              <p class="flight-cost">Aprox Flight Cost: $700</p>
-              <!-- perhaps add calculator icon to this button -->
-              <button class="calculate-estimate">Calculate Estimate</button>
-              <form class="finish-booking">
-      <!-- PLACE FORM FOR BOOKING POST here -->
-              </form>
-
-            </section>
+        <section class="location-container"></section>
+      </section>
+      <section class="book-form hidden">
+        <form class="process-booking">
+          <h4 class="form-title"></h4>
+          <label for="start-date">Start Date</label>
+          <input id="start-date" type="date" name="date"></input>
+          <label for="return-date">Return Date</label>
+          <input id="return-date" type="date" name="date"></input>
+          <label for="party-size">Number of Travelers</label>
+          <input id="party-size" type="number" name="party-size" min="1" max="100" placeholder="1"></input>
+          <section class="form-btn-container">
+            <button class="form-back-btn">BACK</button>
+            <button class="book-this-trip" type="submit">BOOK TRIP</button>
+          </section>
+        </form>
+      </section>
+      <section class="confirm-trip hidden">
+        <section class="confirmation-container">
+          <h4 class="confirm-location"></h4>
+          <p class="confirm-start-date"></p>
+          <p class="confirm-return-date"></p>
+          <p class="confirm-party-size"></p>
+          <p class="total-cost"></p>
+          <section class="form-btn-container">
+            <button class="confirm-back-btn">BACK</button>
+            <button class="confirm-this-trip">CONFIRM BOOKING</button>
           </section>
         </section>
       </section>
-
     </main>
-    <!-- <img src="./images/turing-logo.png" alt="turing logo" height="100px" width="100px"> -->
-
-    <!-- Do not include the index.js or main.bundle.js file here - it is done automatically by the webpack server -->
   </body>
 </html>

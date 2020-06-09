@@ -1,12 +1,13 @@
 .traveler-details-box {
-  width: 42vw;
+  width: 35vw;
   height: 77vh;
   background: lighten($faded-color, 5%);
-  border: 3px solid black;
+  border: 3px solid $shiny-border;
   margin-top: 6vh;
   border-radius: 3vh;
   box-shadow: $shadow;
-  @include flexed(column);
+  @include flexed(column, space-between);
+
   button {
     color: lighten($button-color, 20%);
     background-color: lighten($primary-background, 10%);
@@ -59,11 +60,23 @@
   margin: 2vh;
   overflow: scroll;
   pointer-events: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .travel-history-container {
   @extend .traveler-details-box;
+  width: 52vw;
   background: darken($main-color, 3%);
+
+  .all-trips {
+    width: 10vw;
+    height: 7vh;
+    margin-top: 3vh;
+    margin: .5em;
+  }
+
   .current-trips {
     width: 10vw;
     height: 7vh;
@@ -79,16 +92,13 @@
 }
 
 .new-trip-container {
-  width: 38vw;
+  width: 52vw;
   height: 77vh;
-  background: lighten($main-color, 3%);
-  border: 3px solid black;
+  background: lighten($shiny-border, 3%);
+  border: 3px solid $shiny-border;
   margin-top: 6vh;
   border-radius: 3vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
+  @include flexed(column, center);
 }
 
 .trip-card {
@@ -117,23 +127,23 @@
 
 .status {
   font-weight: 800;
-  color: darkviolet;
-  font-size: 4vh;
+  color: $primary-background;
+  font-size: 2vh;
 }
 
 .search-container {
   display: flex;
   flex-direction: row;
   border: 2px solid $primary-background;
-  width: 15.5vw;
+  width: 19.5vw;
   height: 7vh;
-  background: #ebf5fc;
+  background: $button-color;
   border-radius: 1vh;
   margin-top: 1vh;
   pointer-events: auto;
 
   input {
-    width: 12vw;
+    width: 16vw;
     font-size: 2vh;
   }
 
@@ -147,29 +157,109 @@
 
 .location-container {
   @extend .trips-box;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
 }
 
 .location-card {
-  width: 22vw;
-  height: 37vh;
-  background: white;
-  border-radius: 1vh;
-  align-content: center;
-  display: flex;
-  flex-direction: column;
+  width: 31vw;
+  height: 48vh;
+  border-radius: 5vh;
   text-align: center;
+  margin: 1.5vh;
+  background: $icon-color;
+
+  .location-name {
+    margin: 1em 0em;
+    font-size: 2vh;
+    letter-spacing: .2vh;
+    font-weight: bold;
+  }
 
   .location-img {
-    width: 39vh;
+    justify-content: center;
+    align-content: center;
+    text-align: center;
+    width: 25vw;
     height: 26vh;
+  }
+
+  button {
+    background: $primary-background;
+    color: $button-color;
+    text-align: center;
+    margin-right: 0em;
+    margin-top: 1em;
+    margin-bottom: 1em;
+
+    &:hover {
+      border-radius: 10px;
+      border: 1px solid darken($button-color, 30%);
+      background-color: lighten($primary-background, 40%);
+    }
+
+    &:focus {
+      border-radius: 10px;
+      border: 1px solid darken($button-color, 30%);
+      background-color: lighten($primary-background, 40%);
+    }
   }
 }
 
 .default-message {
   font-size: 4vh;
   padding: 6vh;
+}
+
+.book-form {
+  pointer-events: auto;
+  background: $icon-color;
+  border: 2px solid $main-color;
+  width: 40vw;
+  height: 40vh;
+  border-radius: 3vh;
+  z-index: 100;
+  position: absolute;
+  
+  .process-booking {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    width: 40vw;
+    height: 38vh;
+  }
+
+  button {
+    margin: 0;
+    background: $main-color;
+    margin: 1vh;
+
+    &:hover {
+      border-radius: 10px;
+      border: 1px solid darken($button-color, 30%);
+      background-color: lighten($primary-background, 40%);
+    }
+
+    &:focus {
+      border-radius: 10px;
+      border: 1px solid darken($button-color, 30%);
+      background-color: lighten($primary-background, 40%);
+    }
+  }
+}
+
+.form-btn-container {
+  @include flexed(row, space-between)
+}
+
+.confirm-trip {
+  @extend .book-form;
+  
+  .confirmation-container {
+    height: 41vh;
+    @include flexed(column, space-around)
+  }
+  
+  .confirm-this-trip {
+    background-color: $confirmation;
+  }
 }

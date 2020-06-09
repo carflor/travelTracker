@@ -3,7 +3,8 @@ class Trip {
     this.id = tripObj.id || Date.now();
     this.userID = tripObj.userID;
     this.destinationID = tripObj.destinationID;
-    this.travelers = tripObj.travelers;
+    // added default of 1 for backup
+    this.travelers = tripObj.travelers || 1;
     this.date = tripObj.date;
     this.duration = tripObj.duration; 
     this.status = tripObj.status || 'pending';
