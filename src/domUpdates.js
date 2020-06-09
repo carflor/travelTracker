@@ -49,7 +49,6 @@ class DomUpdates {
     })
   }
 
-  // DUPLICATES ISSUE ON THIS FN?!?
   displayPendingTripsAgent(agent) {
     agent.getAllPendingTrips().forEach(trip => {
       $('.pending-trip-container').prepend(`
@@ -123,7 +122,6 @@ class DomUpdates {
     const clickedUserName = $(event.target).closest('.user-card').find('.user-name').html()
     const userData = agent.allTravelers.allTravelers.find(traveler => traveler.name === clickedUserName)
     const foundUser = new Traveler(userData, agent.allTrips)
-    console.log(foundUser, 'instantiation')
     $('.user-name-title').html(`${foundUser.name}`)
     $('.user-traveling-costs').html(`Year Investment: $${foundUser.getAmountSpentThisYear()}`)
     this.displayUserUpcomingTrips(foundUser)
@@ -135,11 +133,11 @@ class DomUpdates {
     usersHistory.forEach(trip => {
       $('.insert-history-trips').prepend(`
         <section class="history-trip-card">
-          <p class="future-location">${trip.destination}</p>
-          <p class="future-date">${trip.date}</p>
-          <p class="history-duration">${trip.duration}</p>
-          <p class="history-group-size">${trip.travelers}</p>
-          <p class="confirmation-num">${trip.id}</p>
+          <p class="future-location">Destination: ${trip.destination}</p>
+          <p class="future-date">Date: ${trip.date}</p>
+          <p class="history-duration">${trip.duration} Days</p>
+          <p class="history-group-size">${trip.travelers} Travelers</p>
+          <p class="confirmation-num">Confirmation #: ${trip.id}</p>
         </section>
       `)
     })
@@ -152,8 +150,8 @@ class DomUpdates {
         <section class="future-trip-card">
           <section class="future-data-box">
             <p class="future-location">${trip.destination}</p>
-            <p class="future-date">${trip.date}</p>
-            <p class="confirmation-num">${trip.id}</p>
+            <p class="future-date">Date: ${trip.date}</p>
+            <p class="confirmation-num">Confirmation #: ${trip.id}</p>
           </section>
           <button class="cancel-future-btn">CANCEL</button>
         </section>

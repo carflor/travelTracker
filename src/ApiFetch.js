@@ -4,11 +4,11 @@ class ApiFetch {
   }
 
   // getMethod for Single User (should this be used as opposed to all users w/ filter?)
-  // getTravelerById(id) {
-  //   let url = `${this.urlRoot}/travelers/travelers/${id}`;
-  //   console.log(id);
-  //   return fetch(url).then(response => response.json());
-  // }
+  getTravelerById(id) {
+    let url = `${this.urlRoot}/travelers/travelers/${id}`;
+    console.log(id);
+    return fetch(url).then(response => response.json());
+  }
 
   getTravelers() {
     let url = `${this.urlRoot}/travelers/travelers`;
@@ -35,6 +35,7 @@ class ApiFetch {
       body: JSON.stringify(tripRequestObj)
     })
       .then(response => console.log(response.json()))
+      .then()
       .catch(err => console.log(err.message));
   }
 

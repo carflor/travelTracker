@@ -24,7 +24,7 @@ class Traveler {
     return this.tripHistory.reduce((acc, trip) => {
       let tripDate = trip.date;
       let tripEndDate = moment().add(trip.duration, 'day').format("YYYY/MM/DD")
-      if (moment(tripDate).isBetween(tripDate, tripEndDate)) {
+      if (moment(tripDate).isBetween(tripDate, tripEndDate) && trip.travelerName.id === this.id) {
         acc.push(trip)
       }
       return acc
@@ -49,7 +49,6 @@ class Traveler {
   getTripsThisYear() {
     let firstDayYear = moment("2020/01/01").format("YYYY/MM/DD")
     let lastDayYear = moment("2020/12/31").format("YYYY/MM/DD")
-    // console.log(this.tripHistory, 'ERROR LOG')
     return this.tripHistory.reduce((acc, trip) => {
       let tripDate = trip.date
       if (moment(tripDate).isBetween(firstDayYear, lastDayYear) && trip.travelerName.id === this.id) {
@@ -61,11 +60,12 @@ class Traveler {
 
   getAmountSpentThisYear() {
     let yearAmount = this.yearsTrips.reduce((acc, trip) => {
-      const lodging = trip.duration * trip.dailyLodging
-      const totalFlight = trip.flightCost * trip.travelers
-      const total = lodging + totalFlight
-      const percent = total * .1
-      return acc += percent + total
+      let lodging = trip.duration * trip.dailyLodging
+      let totalFlight = trip.flightCost * trip.travelers
+      let total = lodging + totalFlight
+      let percent = total * .1
+      let finalPrice = percent + total
+      return acc += finalPrice
     }, 0)
     return yearAmount.toFixed(2)
   }

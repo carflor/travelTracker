@@ -43,6 +43,7 @@ const fetchApiData = () => {
     // why is line 48 not like .name chained to it !?!?!?!?!?!?
     travelersData: dataSet[0].travelers,
     destinationsData: dataSet[1].destinations, 
+    // tripsData: (dataSet) => fixData(dataSet)
     tripsData: dataSet[2].trips.map(function(trip) {
       return {
         ...trip, 
@@ -59,6 +60,18 @@ const fetchApiData = () => {
     start(allTravelers, allDestinations, allTrips)
   }).catch(error => console.log(error.message))
 }
+
+// function fixData(dataSet) {
+//   dataSet[2].trips.map(function(trip) {
+//     return {
+//       ...trip, 
+//       travelerName: dataSet[0].travelers.find(traveler => traveler.id === trip.userID),
+//       dailyLodging: dataSet[1].destinations.find(city => city.id === trip.destinationID).estimatedLodgingCostPerDay,
+//       flightCost: dataSet[1].destinations.find(city => city.id === trip.destinationID).estimatedFlightCostPerPerson,
+//       destination: dataSet[1].destinations.find(city => city.id === trip.destinationID).destination,
+//     } 
+//   })
+// }
 
 // APP START - instantiations
 function start(travelersData, destinationsData, tripsData) {
@@ -134,6 +147,8 @@ const userBtnHandler = (event) => {
     $('.confirm-trip').addClass('hidden')
     $('.book-form').removeClass('hidden')
   } else if (event.target.classList.contains('confirm-this-trip')) {
+
+
     // triggers POST for trip to be pending
     // NEEDS TO UPDATE DATA ON USER PAGE AFTER POST
     userPost(event, user, destinationsRepo)
@@ -144,23 +159,25 @@ const userBtnHandler = (event) => {
 
 const agentBtnHandler = (event) => {
   if (event.target.classList.contains('all-details')) {
-    // should show pop up with all data for whatever user got picked
     $('.show-user-full-history').removeClass('hidden')
     $('.agent-nav').addClass('blur')
     $('.agent-data-container').addClass('blur')
-    // triggers function taht grabs matching data from 
     domUpdates.displayUserHistoryDetails(event, agent)
-    // name on event target 
-    // grabs the total invested amount for that customer 
-    // grabs all customer flights 
-    // if flights are in future - place a CANCEL button on them
+
+    // if flights are in future - place a CANCEL button on them// !!!! 
+
+
   } else if (event.target.classList.contains('history-back-btn')) {
     $('.show-user-full-history').addClass('hidden')
     $('.agent-nav').removeClass('blur')
     $('.agent-data-container').removeClass('blur')
   } else if (event.target.classList.contains('cancel-trip')) {
+
+
     // triggers fn for POST CANCELLED 
   } else if (event.target.classList.contains('approve-trip')) {
+
+
     // triggers fn for POST APPROVE
   }
 }
@@ -216,11 +233,13 @@ function userPost() {
   const groupSize = $(event.target).closest('.confirmation-container').find('.confirm-party-size').html()
   const formatGroupSize = +groupSize.split(': ')[1]
   const travelDate = $(event.target).closest('.confirmation-container').find('.confirm-start-date').html()
-  const formatTravelDate = moment(travelDate.split(': ')[1], "YYYY/MM/DD")
+  const formatTravelDate = travelDate.split(': ')[1]
+  console.log(formatTravelDate, 'formatted date')
   const returnDate = $(event.target).closest('.confirmation-container').find('.confirm-return-date').html()
-  const formatReturnDate = moment(returnDate.split(': ')[1], "YYYY/MM/DD")
-  const dayAmount = formatReturnDate.diff(formatTravelDate, 'days')
-  console.log(dayAmount)
+  const formatReturnDate = returnDate.split(': ')[1]
+  const momentReturn = moment(formatReturnDate)
+  const momentDepart = moment(formatTravelDate)
+  const dayAmount = momentReturn.diff(momentDepart, 'days')
 
   if (dayAmount) {
     let travelObj = {
@@ -232,17 +251,15 @@ function userPost() {
       "status": "pending",
       "suggestedActivities": []
     }
+
     const travelRequest = new Trip(travelObj)
     const api = new ApiFetch();
 
-    // THIS IS NOT UPDATING THE PAGE AS EXPECTED!?!?
     api.postTripRequest(travelRequest)
-    .then(() => api.getTravelerById(userId))
-    .then(response => loadTraveler(response.id))
-    .catch(err => console.log(err))
-    // .then(() => api.getTrips())
+      .then(travelRequest => tripsRepo.allTrips.push(travelRequest))
+      .then(() => domUpdates.displayUserDashboard(user))
+      .catch(err => console.log(err))
     }
-    // .then(response => domUpdates.displayUserDashboard(response))
 }
 
 

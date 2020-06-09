@@ -21,7 +21,7 @@ class Agent {
   grabTripsForYear() {
     let yearAgo = moment("2020/01/01").format("YYYY/MM/DD")
     let tomorrow = moment().add(1, 'day').format("YYYY/MM/DD")
-    return this.allTrips.allTrips.reduce((acc, trip) => {
+    return this.allTrips.reduce((acc, trip) => {
       let tripDate = trip.date
       if (moment(tripDate).isBetween(yearAgo, tomorrow)) {
         acc.push(trip)
@@ -55,8 +55,9 @@ class Agent {
     return filteredUsers
   }
 
+  // check line 60 
   getAllUsersOnTrips() {
-    return this.allTrips.allTrips.reduce((acc, trip) => {
+    return this.allTrips.reduce((acc, trip) => {
       let tripDate = trip.date
       let finishDate = moment(trip.date).add(trip.duration, 'day').format('YYYY/MM/DD')
       if (moment().isBetween(tripDate, finishDate)) {
