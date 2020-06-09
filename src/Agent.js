@@ -55,7 +55,6 @@ class Agent {
     return filteredUsers
   }
 
-  // check line 60 
   getAllUsersOnTrips() {
     return this.allTrips.reduce((acc, trip) => {
       let tripDate = trip.date

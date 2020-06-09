@@ -24,14 +24,15 @@
         <h2>Log In</h2>
         <section class="input">
           <section class="inputBox">
-            <label>Username</label>
-            <input class="username-input" type="text" placeholder="Enter Traveler Id" value="agent">
+            <label for="username">Username</label>
+            <input class="username-input" type="text" placeholder="Enter Traveler Id" value="agent" aria-label="username-input">
           </section>
           <section class="inputBox">
-            <label>Password</label>
-            <input class="password-input" type="password" placeholder="********" value="travel2020">
+            <label for="password">Password</label>
+            <input class="password-input" type="password" placeholder="********" value="travel2020" aria-label="password-input">
             <section class="inputBox">
-              <input class="submit-button" type="submit" value="Sign In">
+              <label for="submit-login"></label>
+              <input class="submit-button" type="submit" value="Sign In" aria-label="submit-login">
             </section>
           </section>
         </section>
@@ -110,11 +111,11 @@
         <form class="process-booking">
           <h4 class="form-title"></h4>
           <label for="start-date">Start Date</label>
-          <input id="start-date" type="date" name="date"></input>
+          <input id="start-date" type="date" name="date" aria-label="departure-date"></input>
           <label for="return-date">Return Date</label>
-          <input id="return-date" type="date" name="date"></input>
+          <input id="return-date" type="date" name="date" aria-label="return-date"></input>
           <label for="party-size">Number of Travelers</label>
-          <input id="party-size" type="number" name="party-size" min="1" max="100" placeholder="1"></input>
+          <input id="party-size" type="number" name="party-size" min="1" max="100" placeholder="1" aria-label="party-size"></input>
           <section class="form-btn-container">
             <button class="form-back-btn">BACK</button>
             <button class="book-this-trip" type="submit">BOOK TRIP</button>

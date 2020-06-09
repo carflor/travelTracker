@@ -3,7 +3,6 @@ class Trip {
     this.id = tripObj.id || Date.now();
     this.userID = tripObj.userID;
     this.destinationID = tripObj.destinationID;
-    // added default of 1 for backup
     this.travelers = tripObj.travelers || 1;
     this.date = tripObj.date;
     this.duration = tripObj.duration; 

@@ -5,8 +5,9 @@ class Traveler {
     this.name = user.name;
     this.travelerType = user.travelerType;
     this.tripHistory = allTrips;
-    this.yearsTrips = this.getTripsThisYear()
-    this.futureTrips = this.getFutureTrips()
+    this.yearsTrips = this.getTripsThisYear();
+    this.futureTrips = this.getFutureTrips();
+    this.pendingTrips = this.getPendingTrips();
   }
   
   getFutureTrips() {
