@@ -238,11 +238,15 @@
   .future-trip-card {
     border: 1px solid black;
     border-radius: 2vh;
-    @include flexed(row, space-around);
+    @include flexed(row, space-between);
     margin: 1vh;
     padding: 1vh;
     background: $main-color;
     color: $dark-color;
+  }
+
+  button {
+    background: $confirmation;
   }
 }
 
