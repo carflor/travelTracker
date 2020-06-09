@@ -14,7 +14,7 @@ describe('Agent', function() {
     destinations = new Destinations(destinationsTestData)
     trips = new TripRepo(tripTestData)
     travelers = new TravelerRepo(travelerTestData)
-    agent = new Agent(travelers, trips, destinations)
+    agent = new Agent(travelers, trips.allTrips, destinations)
   
   })
 
@@ -35,7 +35,8 @@ describe('Agent', function() {
   });
 
   it('it should have property of all Trips', function() {
-    expect(agent.allTrips).to.deep.equal(trips);
+    console.log(trips, 'in test')
+    expect(agent.allTrips).to.deep.equal(trips.allTrips);
   });
 
   it('it should have property of all Destinations', function() {
