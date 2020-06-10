@@ -34,7 +34,8 @@ Enter `control + c` in the terminal to stop the server
 - HTML/CSS
 - JavaScript
 - JQuery
-- Scss
+- SCSS
+- Moment.js
 - Webpack
 - Mocha
 - Chai
