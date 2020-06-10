@@ -1,20 +1,6 @@
 import $ from "jquery";
 import './css/base.scss';
 import moment from 'moment';
-
-// DATE CHECKS
-const today = moment().format("YYYY/MM/DD")
-console.log(today, 'today')
-const tomorrow = moment().add(1, 'day').format("YYYY/MM/DD")
-console.log(tomorrow, 'tomorrow')
-const yearAgo = moment().subtract(365, 'day').format("YYYY/MM/DD")
-console.log(yearAgo, 'yearAgo')
-const future = moment().isAfter(today)
-console.log(future, 'future')
-let duringYear = moment().isBetween(yearAgo, tomorrow);
-console.log(duringYear, 'during year check')
-
-// IMPORT ALL CLASSES BELOW
 import ApiFetch from './ApiFetch';
 import TravelerRepo from './TravelerRepo'
 import TripRepo from './TripRepo';
@@ -31,19 +17,17 @@ let tripsRepo;
 let user;
 let agent;
 
-// ApiFetch
 const fetchApiData = () => {
+  console.log('triggered')
   const api = new ApiFetch();
   const travelersData = api.getTravelers()
   const tripsData = api.getTrips()
   const destinationsData = api.getDestinations();
   
-  Promise.all([travelersData, destinationsData, tripsData])
+  return Promise.all([travelersData, destinationsData, tripsData])
   .then(dataSet => dataSet = {
-    // why is line 48 not like .name chained to it !?!?!?!?!?!?
     travelersData: dataSet[0].travelers,
     destinationsData: dataSet[1].destinations, 
-    // tripsData: (dataSet) => fixData(dataSet)
     tripsData: dataSet[2].trips.map(function(trip) {
       return {
         ...trip, 
@@ -61,19 +45,6 @@ const fetchApiData = () => {
   }).catch(error => console.log(error.message))
 }
 
-// function fixData(dataSet) {
-//   dataSet[2].trips.map(function(trip) {
-//     return {
-//       ...trip, 
-//       travelerName: dataSet[0].travelers.find(traveler => traveler.id === trip.userID),
-//       dailyLodging: dataSet[1].destinations.find(city => city.id === trip.destinationID).estimatedLodgingCostPerDay,
-//       flightCost: dataSet[1].destinations.find(city => city.id === trip.destinationID).estimatedFlightCostPerPerson,
-//       destination: dataSet[1].destinations.find(city => city.id === trip.destinationID).destination,
-//     } 
-//   })
-// }
-
-// APP START - instantiations
 function start(travelersData, destinationsData, tripsData) {
   travelersRepo = new TravelerRepo(travelersData)
   destinationsRepo = new Destinations(destinationsData)
@@ -109,7 +80,6 @@ function loadAgent() {
   domUpdates.displayAgentDashboard(agent)
 }
 
-// EVENT HANDLERS
 $('.log-out-btn').click(() => location.reload(true))
 $('.user-dashboard').click((event) => userBtnHandler(event))
 $('.agent-dashboard').click((event) => agentBtnHandler(event))
@@ -135,7 +105,6 @@ const userBtnHandler = (event) => {
     domUpdates.displayUserDestinations(destinationsRepo.destinations, '.location-container')
   } else if (event.target.classList.contains('calculate-estimate')) {
     domUpdates.displayBookingPage(event)
-    // insert date value here for tomorrow as earliest travel plan
   } else if (event.target.classList.contains('form-back-btn')) {
     event.preventDefault()
     $('.book-form').addClass('hidden')
@@ -147,13 +116,9 @@ const userBtnHandler = (event) => {
     $('.confirm-trip').addClass('hidden')
     $('.book-form').removeClass('hidden')
   } else if (event.target.classList.contains('confirm-this-trip')) {
-
-
-    // triggers POST for trip to be pending
-    // NEEDS TO UPDATE DATA ON USER PAGE AFTER POST
     userPost(event, user, destinationsRepo)
     domUpdates.finishUserConfirmation()
-    domUpdates.displayUserDashboard(user)
+    alert("Your booking request is confirmed and will be pending upon Agent approval")
   }
 }
 
@@ -163,26 +128,22 @@ const agentBtnHandler = (event) => {
     $('.agent-nav').addClass('blur')
     $('.agent-data-container').addClass('blur')
     domUpdates.displayUserHistoryDetails(event, agent)
-
-    // if flights are in future - place a CANCEL button on them// !!!! 
-
-
   } else if (event.target.classList.contains('history-back-btn')) {
     $('.show-user-full-history').addClass('hidden')
     $('.agent-nav').removeClass('blur')
     $('.agent-data-container').removeClass('blur')
   } else if (event.target.classList.contains('cancel-trip')) {
-
-
-    // triggers fn for POST CANCELLED 
+    agentDeletePost(event)
+    alert("You have cancelled the trip request successfully!")
   } else if (event.target.classList.contains('approve-trip')) {
-
-
-    // triggers fn for POST APPROVE
+    agentApprovePost(event)
+    alert("You have confirmed the trip successfully!")
+  } else if (event.target.classList.contains('cancel-future-btn')) {
+    agentDenyPost(event)
+    alert("You have cancelled a future reservation, automated email sent to traveler!")
   }
 }
 
-// SEARCH FUNCTION
 $('#search').on('keyup', function searchPlaces(event) {
   const searchValue = event.target.value.toLowerCase();
   $('.location-container').html('')
@@ -223,7 +184,6 @@ $('#search-users').on('keyup', function searchUsers(event) {
   }
 })
 
-//USER POST
 function userPost() {
   const userId = user.id
   const destination = $(event.target).closest('.confirmation-container').find('.confirm-location').html()
@@ -243,6 +203,7 @@ function userPost() {
 
   if (dayAmount) {
     let travelObj = {
+      "id": Date.now(),
       "userID": userId,
       "destinationID": destinationId,
       "travelers": formatGroupSize,
@@ -254,13 +215,55 @@ function userPost() {
 
     const travelRequest = new Trip(travelObj)
     const api = new ApiFetch();
-
     api.postTripRequest(travelRequest)
-      .then(travelRequest => tripsRepo.allTrips.push(travelRequest))
-      .then(() => domUpdates.displayUserDashboard(user))
-      .catch(err => console.log(err))
-    }
+    .then(() => fetchApiData())
+    .then(() => loadTraveler(user.id))
+    .catch(err => console.log(err))
+  }
 }
 
+function agentDeletePost(event) {
+  const tripId = $(event.target).closest('.pending-cards').find('.trip-id').html()
+  const formatTripId = tripId.split('# ')[1]
+
+  let deleteObj = {
+    "id": +formatTripId
+  }
+
+  const api = new ApiFetch();
+  api.cancelTrip(deleteObj)
+    .then(() => $(event.target).closest('.pending-cards').addClass('hidden'))
+    .catch(err => console.log(err))
+} 
+
+function agentDenyPost(event) {
+  const tripId = $(event.target).closest('.future-trip-card').find('.confirmation-num').html()
+  console.log(tripId)
+  const formatTripId = tripId.split(': ')[1]
+  console.log(formatTripId, 'format in deny')
+
+  let deleteObj = {
+    "id": +formatTripId
+  }
+
+  const api = new ApiFetch();
+  api.cancelTrip(deleteObj)
+    .catch(err => console.log(err))
+} 
+
+function agentApprovePost(event) {
+  const tripId = $(event.target).closest('.pending-cards').find('.trip-id').html()
+  const formatTripId = tripId.split('# ')[1]
+
+  let approveObj = {
+    "id": +formatTripId,
+    "status": "approved"
+  }
+
+  const api = new ApiFetch();
+  api.approveTrip(approveObj)
+    .then(() => $(event.target).closest('.pending-cards').addClass('confirmation'))
+    .catch(err => console.log(err))
+} 
 
 fetchApiData();

@@ -28,7 +28,7 @@ class DomUpdates {
 
   displaySearchedUsers(searchResults) {
     searchResults.forEach(traveler => {
-      $('.all-travelers-container').prepend(`
+      $('.all-travelers-container').append(`
       <section class="user-card">
         <p class="user-name">${traveler.name}</p>
         <button class="all-details">View Details</button>
@@ -74,17 +74,16 @@ class DomUpdates {
     $('.log-out-btn').removeClass('invisible')
     $('.welcome-message').html(`${user.name.split(' ')[0]} Dashboard`)
     $('.travel-points').html(`Total Travel Points: ${user.getAmountSpentThisYear()}`)
-    const pendingTrips = user.getPendingTrips()
-    if (pendingTrips.length === 0) {
+    if (user.pendingTrips.length === 0) {
       $('.trips-box').html(`<p class='default-message'>No current travel plans<br> Please make a booking to accumulate Travel Points!<p>`)
     } else {
-      this.displayTripCards(pendingTrips, '.trips-box')
+      this.displayTripCards(user.pendingTrips, '.trips-box')
     }
   }
   
   displayTripCards(arr, divClass) {
-    // I ADDED TRIP.DATE TO LINE 92 to see if it fixes data error on display
     if (arr && divClass) {
+      console.log(arr, 'cat 3')
       arr.forEach(trip => {
         $(divClass).prepend(` 
           <section class="trip-card">
@@ -179,9 +178,6 @@ class DomUpdates {
   }
 
   displayConfirmationPage(event, allDestinations) {
-    // validate that all inputs are filled in
-    // validate that depart date is tomorrow at earliest
-    // fix issue with partySize where it does not auto get value of 1 placeholder!
     event.preventDefault()
     const locationName = $(event.target).closest('.process-booking').children().html()
     const startDate = $(event.target).closest('.process-booking').find('#start-date').val()

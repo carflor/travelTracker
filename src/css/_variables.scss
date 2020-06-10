@@ -10,6 +10,7 @@ $confirmation: lighten(#ff0000e3, 20%);
 $header-font: 'Sriracha', cursive;
 $text-font: 'Rubik', sans-serif;
 $fun-background: radial-gradient(circle, rgba(63,94,251,1) 0%, rgba(252,70,107,1) 100%);
+$approved: #5ad81cb3;
 
 @mixin flexed($direction, $justified) {
   display: flex;

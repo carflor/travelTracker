@@ -3,7 +3,6 @@ class ApiFetch {
     this.urlRoot = 'https://fe-apps.herokuapp.com/api/v1/travel-tracker/data'
   }
 
-  // getMethod for Single User (should this be used as opposed to all users w/ filter?)
   getTravelerById(id) {
     let url = `${this.urlRoot}/travelers/travelers/${id}`;
     console.log(id);
