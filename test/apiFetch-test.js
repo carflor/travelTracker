@@ -4,23 +4,21 @@ import ApiFetch from '../src/ApiFetch'
 const spies = require('chai-spies');
 chai.use(spies);
 
-describe.skip('ApiFetch', function() {
-  let api, fetch;
+describe('ApiFetch', function() {
+  let api, window;
   
   beforeEach(function() {
     api = new ApiFetch()
-    global.fetch = () => {
-      return Promise.resolve({
-        ok: true,
-        json: () => Promise.resolve({
-          x: true,
-        }),
-      }) 
-    }
-    chai.spy.on(api, 'fetch', () => { })
-    // window.fetch = {}
-    // let newPromise = new Promise() 
-    // do i need another chai spy for the fetch specifically? 
+    // window.fetch = () => {
+    //   return Promise.resolve({
+    //     ok: true,
+    //     json: () => Promise.resolve({
+    //       x: true,
+    //     }),
+    //   }) 
+    // }
+    window.fetch = {}
+    chai.spy.on(fetch, '', () => { })
   })
   
   it('should have a property of rootUrl', function() {
@@ -32,25 +30,4 @@ describe.skip('ApiFetch', function() {
     expect(fetch).to.have.been.called(1);
     // expect(api.getTravelers()).to.equal(fetch(url).then(response => response.json()).catch(err => console.log(err.message)));
   });
-
-  it.skip('should get all trips', function() {
-    expect(api.getTrips()).to.equal(fetch(url).then(response => response.json()).catch(err => console.log(err.message)));
-  });
-
-  it.skip('should get all travel destinations', function() {
-    expect(api.getDestinations()).to.equal(fetch(url).then(response => response.json()).catch(err => console.log(err.message)));
-  });
 });
-
-// NOTES ON SPY FROM PAST PROJECT
-// beforeEach(function() {
-//   global.document = {};
-//   chai.spy.on(document, "querySelector", () => {return global.document});
-//   chai.spy.on(document, "insertAdjacentHTML", () => {})
-// });
-// it('should call createUserDisplay', function() {
-//   domUpdates.createUserDisplay(users[0]);
-//   expect(document.querySelector).to.have.been.called(1);
-//   expect(document.querySelector).to.have.been.called.with(".banner-image");
-//   expect(document.insertAdjacentHTML).to.have.been.called(1);
-// })

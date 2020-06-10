@@ -16,7 +16,6 @@ class TripRepo {
 
   getTripByUserId(id) {
     if (typeof id === 'string') {
-      // return this.allTrips.filter(trip => trip.userID === id)
       return this.dataPerUser[id]
     }
   }
