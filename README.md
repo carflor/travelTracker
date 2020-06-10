@@ -6,6 +6,7 @@ Final solo project for Module 2 of Turing School of Software Development and Des
 
 ## Sample Images 
 ![](src/images/loginDayTripper.png)
+![](src/images/managerDayTripper.png)
 ![](src/images/userManagerDayTripper.png)
 ![](src/images/userPortalDayTripper.png)
 ![](src/images/userSearch.png)
