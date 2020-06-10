@@ -9,7 +9,7 @@ Final solo project for Module 2 of Turing School of Software Development and Des
 ![](https://github.com/carflor/travelTracker/blob/master/src/images/managerDayTripper.png | width=100)
 ![](https://github.com/carflor/travelTracker/blob/master/src/images/userManagerDayTripper.png | width=100)
 ![](https://github.com/carflor/travelTracker/blob/master/src/images/userPortalDayTripper.png | width=100)
-![](src/images/userSearch.png | width=100)
+![](src/images/userSearch.png)
 
 ## Installation Steps
 ```
