@@ -35,7 +35,6 @@ describe('Agent', function() {
   });
 
   it('it should have property of all Trips', function() {
-    console.log(trips, 'in test')
     expect(agent.allTrips).to.deep.equal(trips.allTrips);
   });
 

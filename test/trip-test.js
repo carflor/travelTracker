@@ -56,7 +56,7 @@ describe('Trip', function() {
     expect(newTrip2.status).to.equal("pending");
   });
 
-  it('it should have a property of suggested activitites', function() {
+  it('it should have a property of suggested activities', function() {
     expect(newTrip.suggestedActivities).to.deep.equal([]);
   });
 });
